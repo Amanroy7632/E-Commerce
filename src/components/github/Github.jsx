@@ -13,7 +13,7 @@ function Github() {
     //     .catch((error)=>(alert("Internet Error")));
     // },[])
     const openDownlaodLink=()=>{
-        window.location.href=data.repos_url;
+        // window.location.href=data.repos_url;
     }
   return (
     
@@ -26,8 +26,7 @@ function Github() {
                <h1>{data?data.name:""}</h1>
                <h2>Repos Link: {data.repos_url}</h2>
                <button onClick={openDownlaodLink}>Download Repo</button>
-           </div>
-           
+           </div> 
         </div>
 
         {/* {data.followers}
