@@ -49,7 +49,7 @@ function Home() {
 
   return (
     <div className='w-full h-screen'>
-      <Slider {...setting}>
+      <Slider {...setting} >
           <div><img src={Himage2} className=' ' alt="Pic" /></div>
           <div> <img src={Himage1} className=' ' alt="" /></div>
           <div> <img src={Himage3} className=' ' alt="" /></div>

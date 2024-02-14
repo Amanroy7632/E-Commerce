@@ -1,7 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Link,NavLink,BrowserRouter} from 'react-router-dom'
+import Login from '../login/Login';
 function Header() {
+    const [visible,setVisible]=useState(false);
+    const turnOnlogin=()=>{
+        // console.log(visible);
+        setVisible(!visible);
+    }
   return (
+    <>
     <header className="shadow sticky z-50 top-0">
     <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
@@ -14,7 +21,8 @@ function Header() {
             </Link>
             <div className="flex items-center lg:order-2">
                 <Link
-                    to="#"
+                    // to="/Login"
+                    onClick={turnOnlogin}
                     className="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
                 >
                     Log in
@@ -77,7 +85,16 @@ function Header() {
         </div>
     </nav>
 </header>
+ {visible?<div className="login-container w-34px h-1/2 z-40 fixed top-20 left-1/4 bg-orange-900 " style={{backgroundColor:"#6E2C00"}} visible={visible}>
+    <div className="close " ><h1 className=" text-3xl p-2 cursor-pointer text-right" onClick={turnOnlogin}>❌</h1></div>
+    
+<Login visible={visible}/>
+</div>:""}
+</>
   )
 }
 
 export default Header;
+export const closeLogin=()=>{
+    setVisible(!visible);
+}

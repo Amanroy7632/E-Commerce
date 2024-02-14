@@ -25,7 +25,8 @@ function Github() {
            <div className="content border">
                <h1>{data?data.name:""}</h1>
                <h2>Repos Link: {data.repos_url}</h2>
-               <button onClick={openDownlaodLink}>Download Repo</button>
+               <a href='Resume.aman' download={data.repos_url}> Download Repo</a>
+               {/* <button onClick={openDownlaodLink}  download="">Download Repo</button> */}
            </div> 
         </div>
 
