@@ -11,6 +11,13 @@
   color: #fff;
   
 } */
+.login-container{
+  scroll-behavior: smooth;
+  /* background-color: #007bff; */
+  /* width: 10rem; */
+  /* transition: 0.5s all ease-in-out; */
+  transition: all 0.5s ease-in-out;
+}
 .img-container{
   width: max-content;
   width: 100%;

@@ -1,7 +1,13 @@
 import React, { useState } from 'react'
 import {Link,NavLink,BrowserRouter} from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faUserTie } from '@fortawesome/fontawesome-svg-core';
+import { faUserTie,faShoppingCart} from "@fortawesome/free-solid-svg-icons";
 import Login from '../login/Login';
+import { CartState } from '../../context/Context';
+// import 'index.css'
 function Header() {
+    const {state}=CartState()
     const [visible,setVisible]=useState(false);
     const turnOnlogin=()=>{
         // console.log(visible);
@@ -28,10 +34,12 @@ function Header() {
                     Log in
                 </Link>
                 <Link
-                    to="#"
+                    to="/cart"
                     className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none "
                 >
-                    Get started
+                    {/* Get started */}
+                    <FontAwesomeIcon icon={faShoppingCart} />
+                <sup className=' text-lg p-1'>{state.cart.length}</sup> 
                 </Link>
             </div>
             <div

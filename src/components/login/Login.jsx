@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./login.css";
-import { closeLogin } from "../header/Header";
+// import { closeLogin } from "../header/Header";
 function Login({visible}) {
     // const[isvisible,setVisible]=useState(visible)
     function setLoginFalse(){
