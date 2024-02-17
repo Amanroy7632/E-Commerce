@@ -21,7 +21,7 @@
         homeDelevry:true,
         imageSrc:"https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSuTLofES66LaKx7QXtSvMO7dB1NnCSIjU013y3UawpA6nOP8nmcioWqdqHCn4cRhxSJOrRi4v5DF3XpEcBvgGdrvubu8rdJaXyUrXHPBRVuR0FTUt2mv9nnA"
     },{
-        pname:"Pens",
+        pname:"Sony Music System 20W Black",
         id:4,
         price:"2906.52",
         ref:"12354",

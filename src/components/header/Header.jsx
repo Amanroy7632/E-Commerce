@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserTie,faShoppingCart} from "@fortawesome/free-solid-svg-icons";
 import Login from '../login/Login';
 import { CartState } from '../../context/Context';
+import { useSelector } from 'react-redux';
 // import 'index.css'
 function Header() {
     const {state}=CartState()
@@ -13,6 +14,9 @@ function Header() {
         // console.log(visible);
         setVisible(!visible);
     }
+    const data = useSelector((state) => state.cartItem);
+    const items = data.cart;
+
   return (
     <>
     <header className="shadow sticky z-50 top-0">
@@ -39,7 +43,7 @@ function Header() {
                 >
                     {/* Get started */}
                     <FontAwesomeIcon icon={faShoppingCart} />
-                <sup className=' text-lg p-1'>{state.cart.length}</sup> 
+                <sup className=' text-lg p-1'>{items.length}</sup> 
                 </Link>
             </div>
             <div

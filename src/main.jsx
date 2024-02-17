@@ -7,7 +7,8 @@ import Home from './components/home/Home'
 import About from './components/about/About'
 import Contact from './components/contact/Contact'
 import User from './components/user/User'
-// import Cart from './components/cart/Cart'
+import Cart from './components/cart/Cart'
+import fetchProductDataSet from './products/fetchProductDataSet'
 // import FinalCart from './components/cart/FinalCart'
 import Github, { fetchGithubData } from './components/github/Github'
 // const router=createBrowserRouter([
@@ -44,9 +45,9 @@ createRoutesFromChildren(
     <Route path='user/:userId' element={<User/>}/>
     <Route path='github' element={<Github/>}
     loader={fetchGithubData}/>
-    {/* <Route path='cart' element={<Cart ItemData={ItemData}/>}/> */}
+    <Route path='cart' element={<Cart ItemData={ItemData}/>}/>
     {/* <Route path='cart' element={<FinalCart ItemData={ItemData}/>}/> */}
-    <Route path='cart' element={<ShoppingCart ItemData={ItemData}/>}/>
+    {/* <Route path='cart' element={<ShoppingCart ItemData={ItemData}/>}/> */}
     
     
   </Route>
