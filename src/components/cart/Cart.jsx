@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import Item from "./Item";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLock ,faClose ,faDeleteLeft} from "@fortawesome/free-solid-svg-icons";
+import { faDeleteLeft} from "@fortawesome/free-solid-svg-icons";
 import "../cart/cart.css";
 import { useSelector,useDispatch } from "react-redux";
 import { removeToCart,increaseQty,decreaseQty,checkPromoCode } from "../../features/cartSlice";
@@ -10,14 +10,22 @@ import { useState } from "react";
 const prevUsedPromoCode=[]
 function Cart({ ItemData }) {
   const [prmCode,setprmCode]=useState("");
+ 
   const data = useSelector((state) => state.cartItem);
   const items = data.cart;
   const dispatch = useDispatch()
-  console.log(items);
+  // console.log(items);
   const promoCodes=data.promoCode;
+  const [tQty,setQty]=useState(items.length)
   const totalCost=()=>{
     return items.reduce((acc, item) =>acc+(item.price*item.qty ), 0);
   }
+  const totalQty=()=>{
+    return items.reduce((acc, item) =>acc+(item.qty ), 0);
+  }
+  useEffect(()=>{
+    setQty(items.reduce((acc, item) =>acc+(item.qty ), 0))
+  },[tQty])
   let [totalCalculatedCost,setTotalCost]=useState(totalCost());
   const checkValidPromoCode=(e)=>{
     e.preventDefault();
@@ -25,6 +33,7 @@ function Cart({ ItemData }) {
   }
   
   return (
+    items.length>0?
     <div className="card ">
       <div className="row">
         <div className="col-md-8 cart ">
@@ -32,7 +41,7 @@ function Cart({ ItemData }) {
             <div className="row">
               <div className="col">
                 <h4>
-                  <b>Shopping Cart</b>
+                  <b>Your Cart</b>
                 </h4>
               </div>
               <div className="col align-self-center text-right text-muted">
@@ -45,13 +54,14 @@ function Cart({ ItemData }) {
             <div className="row main align-items-center flex justify-evenly items-center border">
               <div className="col-2">
                 <img
-                  className="img-fluid"
+                  className="img-fluid" style={{objectFit:"cover",aspectRatio:"1/1"}}
                   src={item.thumbnail}
                 />
               </div>
               <div className="col">
                 <div className="row text-muted">{item.title}</div>
                 <div className="row">{item.description.substr(0,30)}</div>
+                <div className="row">{item.discountPercentage}% Off</div>
               </div>
               <div className="col">
                 <span onClick={()=>{dispatch(decreaseQty(item))}}className=" cursor-pointer text-3xl p-3" >-</span>
@@ -70,8 +80,9 @@ function Cart({ ItemData }) {
           </div>
           ))}
           <div className="back-to-shop">
-            <a href="#">⬅️</a>
-            <span className="text-muted">Back to shop</span>
+            {/* <a href="#">⬅️</a> */}
+            <Link to="/"className=" hover:bg-orange-800 focus:ring-4 focus:ring-orange-300" >⬅️<span className="text-muted">Back to shop</span></Link>
+            
           </div>
         </div>
         <div className="col-md-4 summary">
@@ -83,9 +94,9 @@ function Cart({ ItemData }) {
           <hr />
           <div className="row">
             <div className="col" style={{ paddingLeft: "0" }}>
-              ITEMS {items.length }
+             TOTAL ITEMS { items.reduce((acc, item) =>acc+(item.qty ), 0) }
             </div>
-            <div className="col text-right">&euro; {totalCost()}</div>
+            <div className="col text-right">&euro; {items.reduce((acc, item) =>acc+(item.price*item.qty ), 0)}</div>
           </div>
           <form >
             <p>SHIPPING COST</p>
@@ -104,12 +115,12 @@ function Cart({ ItemData }) {
             style={{ borderTop: "1px solid rgba(0,0,0,.1)", padding: "2vh 0" }}
           >
             <div className="col">TOTAL PRICE</div>
-            <div className="col text-right">&euro; {totalCalculatedCost}</div>
+            <div className="col text-right">&euro; {items.reduce((acc, item) =>acc+(item.price*item.qty ), 0)}</div>
           </div>
-          <button onClick={checkValidPromoCode} className="btn">CHECKOUT</button>
+          <button onClick={checkValidPromoCode} className="btn-checkout">CHECKOUT</button>
         </div>
       </div>
-    </div>
+    </div>:(<div><h2>Your Cart is Empty</h2></div>)
   );
 }
 

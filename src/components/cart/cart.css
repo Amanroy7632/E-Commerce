@@ -1,12 +1,4 @@
-/* body{
-    background: #ddd;
-    min-height: 100vh;
-    vertical-align: middle;
-    display: flex;
-    font-family: sans-serif;
-    font-size: 0.8rem;
-    font-weight: bold;
-} */
+
 .title{
     margin-bottom: 5vh;
 }
@@ -79,6 +71,7 @@ a{
 }
 .img-fluid{
     width: 7rem;
+    background-blend-mode:darken;
 }
 .back-to-shop{
     margin-top: 4.5rem;
@@ -112,7 +105,7 @@ input:focus::-webkit-input-placeholder
 {
       color:transparent;
 }
-.btn{
+.btn-checkout{
     background-color: #000;
     border-color: #000;
     color: white;
@@ -122,7 +115,7 @@ input:focus::-webkit-input-placeholder
     padding: 1vh;
     border-radius: 0;
 }
-.btn:focus{
+.btn-checkout:focus{
     box-shadow: none;
     outline: none;
     box-shadow: none;
@@ -131,7 +124,7 @@ input:focus::-webkit-input-placeholder
     -webkit-user-select: none;
     transition: none; 
 }
-.btn:hover{
+.btn-checkout:hover{
     color: white;
 }
 a{

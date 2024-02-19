@@ -41,7 +41,7 @@ createRoutesFromChildren(
     <Route path='' element={
     <Home/>} />
     <Route path='about' element={<About/>}/>
-    <Route path='contact' element={<Contact/>}/>
+    <Route path='contact' element={<Contact />}/>
     <Route path='user/:userId' element={<User/>}/>
     <Route path='github' element={<Github/>}
     loader={fetchGithubData}/>

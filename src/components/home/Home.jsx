@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import getProduct from "../../products/productDataSet";
 import { useLoaderData } from "react-router-dom";
 async function getProduct(){
-  await fetch('https://api.github.com/users/Amanroy7632').then(
+  await fetch('https://dumyjson.com/products').then(
       (res)=>{
           const res_data=res.json();
           console.log(res_data)
@@ -28,10 +28,10 @@ async function getProduct(){
 function Home() {
   //  const res=useLoaderData();
   //  console.log(res);
-  const data=getProduct();
+  // const data=getProduct();
   const items=useSelector(state=>state.cartItem);
   const dispatch=useDispatch()
-  console.log(items.products);
+  // console.log(items.products);
   const products=items.products;
   const { state } = CartState();
   // const products = [
@@ -76,9 +76,10 @@ function Home() {
   const [addProduct, setAddProduct] = useState({});
   // const {products} = useCart();
   let setting = {
+    
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 1000,
     slideToShow: 2,
     initialSlide: 0,
     slidesToScroll: 1,
@@ -128,7 +129,7 @@ function Home() {
     console.log(product);
   };
   return (
-    <div className="w-full h-screen overflow-y-auto overflow-x-hidden">
+    <div className="p-items w-full  overflow-y-auto overflow-x-hidden">
       <Slider {...setting}>
         <div>
           <img src={Himage2} className=" " alt="Pic" />
@@ -156,7 +157,7 @@ function Home() {
       <div className="text-for-write w-full h-1/3 pt-5">
         <div className="mt-4">
           <h2>Products</h2>
-          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {products.map((product) => {
               return <SingleProduct key={product.id} product={product} />;
             })}
