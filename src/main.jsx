@@ -1,16 +1,24 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { Route, RouterProvider, createBrowserRouter, createRoutesFromChildren, useSubmit } from 'react-router-dom'
-import './index.css'
-import Layout from './Layout'
-import Home from './components/home/Home'
-import About from './components/about/About'
-import Contact from './components/contact/Contact'
-import User from './components/user/User'
-import Cart from './components/cart/Cart'
-import fetchProductDataSet from './products/fetchProductDataSet'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { Outlet } from "react-router-dom";
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromChildren,
+  useSubmit,
+} from "react-router-dom";
+import "./index.css";
+import Layout from "./Layout";
+import Home from "./components/home/Home";
+import About from "./components/about/About";
+import Contact from "./components/contact/Contact";
+import User from "./components/user/User";
+import Cart from "./components/cart/Cart";
+import Category from "./components/category/Category";
+import fetchProductDataSet from "./products/fetchProductDataSet";
 // import FinalCart from './components/cart/FinalCart'
-import Github, { fetchGithubData } from './components/github/Github'
+import Github, { fetchGithubData } from "./components/github/Github";
 // const router=createBrowserRouter([
 //   {
 //     path:"/",
@@ -27,38 +35,35 @@ import Github, { fetchGithubData } from './components/github/Github'
 //   }
 // ])
 // import { cartContextProvider } from './context/cartContext'
-import ShoppingCart from './components/cart/ShoppingCart'
-import ItemData  from './components/cart/ItemData'
-
-function addToCart(product){
-
+import ShoppingCart from "./components/cart/ShoppingCart";
+import ItemData from "./components/cart/ItemData";
+import Products from "./components/category/Products";
+const data={
+  products:[1,2,3,4,4]
 }
-const router=createBrowserRouter(
-createRoutesFromChildren(
-  
-  <Route path='/' element={<Layout/>}>
-    
-    <Route path='' element={
-    <Home/>} />
-    <Route path='about' element={<About/>}/>
-    <Route path='contact' element={<Contact />}/>
-    <Route path='user/:userId' element={<User/>}/>
-    <Route path='github' element={<Github/>}
-    loader={fetchGithubData}/>
-    <Route path='cart' element={<Cart ItemData={ItemData}/>}/>
-    {/* <Route path='cart' element={<FinalCart ItemData={ItemData}/>}/> */}
-    {/* <Route path='cart' element={<ShoppingCart ItemData={ItemData}/>}/> */}
-    
-    
-  </Route>
+function addToCart(product) {}
+const router = createBrowserRouter(
+  createRoutesFromChildren(
+    <Route path="/" element={<Layout />}>
+      <Route path="" element={<Home />} />
+      <Route path="category" element={<Category />}>
+        {/* Render nested routes within the Category component */}
+        {/* <Route path="products" element={<Outlet />}> */}
+          <Route path=":id" element={<Products />} />
+          {/* Add more nested routes for products if needed */}
+        {/* </Route> */}
+      </Route>
+      <Route path="about" element={<About />} />
+      <Route path="contact" element={<Contact />} />
+      <Route path="user/:userId" element={<User />} />
+      <Route path="github" element={<Github />} loader={fetchGithubData} />
+      <Route path="cart" element={<Cart ItemData={ItemData} />} />
+    </Route>
+  )
+);
 
-)
-)
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    
-    <RouterProvider router={router}/>
-    
-  </React.StrictMode>,
-)
-
+    <RouterProvider router={router} />
+  </React.StrictMode>
+);

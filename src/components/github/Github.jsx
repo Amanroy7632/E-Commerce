@@ -1,21 +1,15 @@
 import {React,useEffect,useState} from 'react'
 import { useLoaderData } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import Loader from '../loader/Loader'
 function Github() {
     const data=useLoaderData()
-    // const [data,setData]=useState([]);
-    // useEffect(()=>{
-    //      fetch("https://api.github.com/users/Amanroy7632")
-    //     .then(res=> res= res.json())
-    //     .then(data=>{
-    //         console.log(data);
-    //         setData(data)
-    //     })
-    //     .catch((error)=>(alert("Internet Error")));
-    // },[])
+    console.log(data);
+   
     const openDownlaodLink=()=>{
         // window.location.href=data.repos_url;
     }
-  return (
+  return data? (
     
     // <div className='w-full border border-red-300 p-5 flex flex-wrap justify-evenly'>
     //     <div className="container w-full border flex flex-wrap justify-between ">
@@ -36,11 +30,15 @@ function Github() {
     // </div>
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
     <div className="max-w-md w-full bg-white p-8 shadow-md rounded-md">
+      <Link to="https://portfolio-eight-rose-19.vercel.app/" target='_blanck'> 
+        
+      PortFolio
+      </Link>
       {data ? (
         <div>
           <div className="text-center mb-4">
             <img src={data.avatar_url} alt="Avatar" className=" w-72  rounded-full mx-auto mb-2" />
-            <h2 className="text-xl font-bold">{data.name}</h2>
+            <h2 className="text-xl font-bold text-gray-700">{data.name}</h2>
             <p className="text-gray-600">@{data.login}</p>
           </div>
           <div>
@@ -50,6 +48,16 @@ function Github() {
               <p className="text-gray-700">Following: {data.following}</p>
               <p className="text-gray-700">Public Repositories: {data.public_repos}</p>
             </div>
+            {/* <div className='flex flex-wrap'>
+              <ul>
+              {
+
+                repoData.map((data)=>( data.id!==754739870 && data.id!==753187765?<p>{data.name}</p>:""))
+              }
+              </ul>
+            </div> */}
+            {/* <p>Get Repo</p> */}
+            {/* <Link to={data.repos_url}>Get Repo</Link> */}
           </div>
         </div>
       ) : (
@@ -57,7 +65,7 @@ function Github() {
       )}
     </div>
     </div>
-  )
+  ):<Loader />
 }
 
 export default Github
