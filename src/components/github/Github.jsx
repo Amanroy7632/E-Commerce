@@ -28,9 +28,9 @@ function Github() {
     //     {data.avtar_url} */}
       
     // </div>
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-    <div className="max-w-md w-full bg-white p-8 shadow-md rounded-md">
-      <Link to="https://portfolio-eight-rose-19.vercel.app/" target='_blanck'> 
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center dark:bg-black dark:border-gray-700 ">
+    <div className="max-w-md w-full bg-white p-8 shadow-md rounded-md dark:bg-gray-800 dark:border-gray-700 ">
+      <Link to="https://portfolio-eight-rose-19.vercel.app/" target='_blanck' className='dark:text-white'> 
         
       PortFolio
       </Link>
@@ -38,15 +38,15 @@ function Github() {
         <div>
           <div className="text-center mb-4">
             <img src={data.avatar_url} alt="Avatar" className=" w-72  rounded-full mx-auto mb-2" />
-            <h2 className="text-xl font-bold text-gray-700">{data.name}</h2>
-            <p className="text-gray-600">@{data.login}</p>
+            <h2 className="text-xl font-bold text-gray-700 dark:text-white">{data.name}</h2>
+            <p className="text-gray-600 dark:text-yellow-50">@{data.login}</p>
           </div>
           <div>
-            <p className="text-gray-700">{data.bio}</p>
+            <p className="text-gray-700 dark:text-white">{data.bio}</p>
             <div className="mt-4">
-              <p className="text-gray-700">Followers: {data.followers}</p>
-              <p className="text-gray-700">Following: {data.following}</p>
-              <p className="text-gray-700">Public Repositories: {data.public_repos}</p>
+              <p className="text-gray-700 dark:text-white">Followers: {data.followers}</p>
+              <p className="text-gray-700 dark:text-white">Following: {data.following}</p>
+              <p className="text-gray-700 dark:text-white">Public Repositories: {data.public_repos}</p>
             </div>
             {/* <div className='flex flex-wrap'>
               <ul>
@@ -61,7 +61,7 @@ function Github() {
           </div>
         </div>
       ) : (
-        <p className="text-center">Loading...</p>
+        <p className="text-center dark:text-white">Loading...</p>
       )}
     </div>
     </div>

@@ -156,7 +156,7 @@ function Home() {
       </Slider>
       <div className="text-for-write w-full h-1/3 pt-5">
         <div className="mt-4">
-          <h2>Products</h2>
+          {/* <h2>Products</h2> */}
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {products.map((product) => {
               return <SingleProduct key={product.id} product={product} />;

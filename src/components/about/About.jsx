@@ -5,8 +5,8 @@ function About() {
     // <div>
     //   <Responsive/>
     // </div>
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-    <div className="max-w-2xl w-full bg-white p-8 shadow-md rounded-md">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-black dark:border-gray-700">
+    <div className="max-w-2xl w-full bg-white p-8 shadow-md rounded-md border dark:bg-gray-800 dark:border-gray-700 dark:text-white">
       <h2 className="text-2xl font-bold mb-4">About Us</h2>
       <p className="mb-4">
         Welcome to our shopping website! At SwiftBuy, we are committed to providing high-quality products and excellent customer service to our valued customers.

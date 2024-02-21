@@ -7,11 +7,14 @@ function SingleProduct({ product }) {
   const state=useSelector(state=>state.cartItem)
   const dispatch1 = useDispatch();
   return (  
+    
     <div
+    
       key={product.id}
       className="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 "
     >
-      <a href="/">
+      
+      <a href="">
         <img
           className="p-8 rounded-t-lg  aspect-square m-auto"
           src={product["thumbnail"]}

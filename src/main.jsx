@@ -49,10 +49,11 @@ const router = createBrowserRouter(
       <Route path="category" element={<Category />}>
         {/* Render nested routes within the Category component */}
         {/* <Route path="products" element={<Outlet />}> */}
-          <Route path=":id" element={<Products />} />
+          <Route path="products/:productId" element={<Products />} />
           {/* Add more nested routes for products if needed */}
         {/* </Route> */}
       </Route>
+      <Route path="products/:productId" element={<Products />} />
       <Route path="about" element={<About />} />
       <Route path="contact" element={<Contact />} />
       <Route path="user/:userId" element={<User />} />

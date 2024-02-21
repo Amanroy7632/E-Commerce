@@ -34,9 +34,10 @@ function Cart({ ItemData }) {
   
   return (
     items.length>0?
-    <div className="card ">
-      <div className="row">
-        <div className="col-md-8 cart ">
+    <div className="container-all dark:bg-black dark:border-gray-700 ">
+    <div className="card dark:bg-black dark:border-gray-700">
+      <div className="row dark:bg-black dark:border-gray-700">
+        <div className="col-md-8 cart dark:bg-gray-800 dark:border-gray-700 dark:text-white">
           <div className="title">
             <div className="row">
               <div className="col">
@@ -60,7 +61,7 @@ function Cart({ ItemData }) {
               </div>
               <div className="col">
                 <div className="row text-muted">{item.title}</div>
-                <div className="row">{item.description.substr(0,30)}</div>
+                <div className="row">{item.description?item.description.substr(0,30):""}</div>
                 <div className="row">{item.discountPercentage}% Off</div>
               </div>
               <div className="col">
@@ -81,7 +82,7 @@ function Cart({ ItemData }) {
           ))}
           <div className="back-to-shop">
             {/* <a href="#">⬅️</a> */}
-            <Link to="/"className=" hover:bg-orange-800 focus:ring-4 focus:ring-orange-300" >⬅️<span className="text-muted">Back to shop</span></Link>
+            <Link to="/"className=" hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 dark:text-white" >⬅️<span className="text-muted">Back to shop</span></Link>
             
           </div>
         </div>
@@ -120,7 +121,7 @@ function Cart({ ItemData }) {
           <button onClick={checkValidPromoCode} className="btn-checkout">CHECKOUT</button>
         </div>
       </div>
-    </div>:(<div><h2>Your Cart is Empty</h2></div>)
+    </div></div>:(<div><h2>Your Cart is Empty</h2></div>)
   );
 }
 
