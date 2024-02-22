@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from "react";
 import CategoryCard from "./CategoryCard";
 import Loader from "../loader/Loader";
+import { useSelector } from "react-redux";
+import { useLoaderData } from "react-router-dom";
 function Category() {
+  // const repoData=useLoaderData();
+  // console.log(repoData);
   const [repoData, setRepoData] = useState([]);
+  const productDetail=useSelector(state=>state.cartItem)
+  // console.log(productDetail.categoryProduct);
+
   useEffect(() => {
     //  fetch("https://dummyjson.com/products")
     fetch("https://dummyjson.com/carts")
       .then((res) => (res = res.json()))
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setRepoData(data);
       })
       .catch((error) => console.log("Internet Error"));
   }, []);
-  console.log(repoData.carts);
+  // console.log(repoData.carts);
   return repoData && repoData.carts ? (
     <div className="min-h-screen bg-gray-100 py-8 dark:bg-black dark:border-gray-700">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -38,3 +45,7 @@ function Category() {
 }
 
 export default Category;
+export const fetchProductData= async ()=>{
+  const res= await fetch("https://dummyjson.com/carts")
+  return res;
+}

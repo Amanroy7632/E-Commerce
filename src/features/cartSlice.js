@@ -1,9 +1,11 @@
 import { createSlice ,nanoid} from "@reduxjs/toolkit";
 import ItemData from "../../src/components/cart/ItemData"
 import { products } from "../products/productData";
+import { categoryProductData } from "../products/categoryProductData";
 const initialState={
     cart:[],
     products:products,
+    categoryProduct:categoryProductData,
     totalQty:0,
     totalPrice:0,
     promoCode:[{id:1,code:"Aman",off:15,isValid:true},{id:1,code:"Aman7632",off:10,isValid:true}]

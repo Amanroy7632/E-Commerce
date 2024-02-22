@@ -1,6 +1,7 @@
 import React from "react";
 import { CartState } from "../../context/Context";
 // import { UseDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart ,removeToCart } from "../../features/cartSlice";
 function SingleProduct({ product }) {
@@ -14,7 +15,7 @@ function SingleProduct({ product }) {
       className="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 "
     >
       
-      <a href="">
+      <Link to={`home/products/${product.id}`}>
         <img
           className="p-8 rounded-t-lg  aspect-square m-auto"
           src={product["thumbnail"]}
@@ -25,7 +26,7 @@ function SingleProduct({ product }) {
             objectFit: "cover",
           }}
         />
-      </a>
+      </Link>
       <div className="px-5 pb-5">
         <a href="/">
           <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">

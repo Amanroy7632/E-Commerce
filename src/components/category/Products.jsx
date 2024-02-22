@@ -1,10 +1,12 @@
 import React,{useEffect,useState} from 'react'
-import { useParams } from "react-router-dom";
+import { useParams,Link } from "react-router-dom";
 // import SingleProduct from '../product/SingleProduct';
 import { useSelector,useDispatch } from 'react-redux';
 import { addToCart,removeToCart } from '../../features/cartSlice';
 import Loader from '../loader/Loader';
 function Products() {
+  let a="Aman"
+  
   const state=useSelector(state=>state.cartItem)
   const dispatch = useDispatch();
   const {productId}=useParams();
@@ -13,12 +15,12 @@ function Products() {
     fetch(`https://dummyjson.com/carts/${productId}`)
       .then((res) => (res = res.json()))
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setProduct(data);
       })
       .catch((error) => console.log("Internet Error"));
   }, []);
-  return product && product.products ? <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+  return product && product.products ? <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 dark:bg-black">
     {( product.products.map((data)=>(
   
 
@@ -28,7 +30,7 @@ function Products() {
       className="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 "
     >
       
-      <a href="">
+      <Link to={`/products/${productId}/${data.title.replace('/','@')}/${data.id}`}>
         <img
           className="p-8 rounded-t-lg  aspect-square m-auto"
           src={data["thumbnail"]}
@@ -40,7 +42,7 @@ function Products() {
             // mixBlendMode:"darken"
           }}
         />
-      </a>
+      </Link>
       <div className="px-5 pb-5">
         <a href="/">
           <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">

@@ -17,8 +17,10 @@ import User from "./components/user/User";
 import Cart from "./components/cart/Cart";
 import Category from "./components/category/Category";
 import fetchProductDataSet from "./products/fetchProductDataSet";
+import ProductDetail from "./components/productdetail/ProductDetail";
 // import FinalCart from './components/cart/FinalCart'
 import Github, { fetchGithubData } from "./components/github/Github";
+import { fetchProductData } from "./components/category/Category";
 // const router=createBrowserRouter([
 //   {
 //     path:"/",
@@ -46,14 +48,16 @@ const router = createBrowserRouter(
   createRoutesFromChildren(
     <Route path="/" element={<Layout />}>
       <Route path="" element={<Home />} />
-      <Route path="category" element={<Category />}>
+      <Route path="category" element={<Category />} loader={fetchProductData}>
         {/* Render nested routes within the Category component */}
         {/* <Route path="products" element={<Outlet />}> */}
           <Route path="products/:productId" element={<Products />} />
           {/* Add more nested routes for products if needed */}
         {/* </Route> */}
       </Route>
+      <Route path="home/products/:productId" element={<ProductDetail />} />
       <Route path="products/:productId" element={<Products />} />
+      <Route path="products/:productId/:title/:id" element={<ProductDetail />} />
       <Route path="about" element={<About />} />
       <Route path="contact" element={<Contact />} />
       <Route path="user/:userId" element={<User />} />

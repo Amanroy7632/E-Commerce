@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import { getData  } from "../../products/productDataSet";
 // import getProduct from "../../products/productDataSet";
 import { useLoaderData } from "react-router-dom";
+// import ProductDetail from "../productdetail/ProductDetail";
 async function getProduct(){
   await fetch('https://dumyjson.com/products').then(
       (res)=>{
@@ -128,8 +129,9 @@ function Home() {
     addToCart(product);
     console.log(product);
   };
+ 
   return (
-    <div className="p-items w-full  overflow-y-auto overflow-x-hidden">
+    <div className="p-items w-full  overflow-y-auto overflow-x-hidden dark:bg-black dark:text-white">
       <Slider {...setting}>
         <div>
           <img src={Himage2} className=" " alt="Pic" />
@@ -164,6 +166,7 @@ function Home() {
           </ul>
         </div>
       </div>
+      {/* <ProductDetail /> */}
     </div>
   );
 }
