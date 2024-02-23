@@ -8,6 +8,8 @@ function Category() {
   // console.log(repoData);
   const [repoData, setRepoData] = useState([]);
   const productDetail=useSelector(state=>state.cartItem)
+  // const repoData=productDetail.carts;
+  // console.log(repoData);
   // console.log(productDetail.categoryProduct);
 
   useEffect(() => {

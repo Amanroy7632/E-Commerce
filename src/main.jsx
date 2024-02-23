@@ -48,7 +48,9 @@ const router = createBrowserRouter(
   createRoutesFromChildren(
     <Route path="/" element={<Layout />}>
       <Route path="" element={<Home />} />
-      <Route path="category" element={<Category />} loader={fetchProductData}>
+      <Route path="category" element={<Category />} 
+      loader={fetchProductData}
+      >
         {/* Render nested routes within the Category component */}
         {/* <Route path="products" element={<Outlet />}> */}
           <Route path="products/:productId" element={<Products />} />

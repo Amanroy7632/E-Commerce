@@ -7,9 +7,11 @@ import "../cart/cart.css";
 import { useSelector,useDispatch } from "react-redux";
 import { removeToCart,increaseQty,decreaseQty,checkPromoCode } from "../../features/cartSlice";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 const prevUsedPromoCode=[]
 function Cart({ ItemData }) {
   const [prmCode,setprmCode]=useState("");
+  const productId=useParams();
  
   const data = useSelector((state) => state.cartItem);
   const items = data.cart;
@@ -54,10 +56,12 @@ function Cart({ ItemData }) {
             <div className="row border-top border-bottom ">
             <div className="row main align-items-center flex justify-evenly items-center border">
               <div className="col-2">
+                <Link to={`/products/${productId}/${item.title.replace('/','@')}/${item.id}`}>
                 <img
                   className="img-fluid" style={{objectFit:"cover",aspectRatio:"1/1"}}
                   src={item.thumbnail}
                 />
+                </Link>
               </div>
               <div className="col">
                 <div className="row text-muted">{item.title}</div>
@@ -66,7 +70,7 @@ function Cart({ ItemData }) {
               </div>
               <div className="col">
                 <span onClick={()=>{dispatch(decreaseQty(item))}}className=" cursor-pointer text-3xl p-3" >-</span>
-                <span  className=" border cursor-pointer text-2xl p-3">
+                <span  className="  cursor-pointer text-2xl p-3">
                   {item.qty}
                 </span>
                 <span onClick={()=>{dispatch(increaseQty(item))}} className=" cursor-pointer text-3xl p-3">+</span>
