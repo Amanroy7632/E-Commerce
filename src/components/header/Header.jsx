@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, NavLink, BrowserRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faUserTie } from '@fortawesome/fontawesome-svg-core';
-import { faUserTie, faShoppingCart, faL } from "@fortawesome/free-solid-svg-icons";
+import { faUserTie, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import Login from "../login/Login";
 import { CartState } from "../../context/Context";
 import { useSelector } from "react-redux";
@@ -42,7 +42,7 @@ function Header() {
           <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
             <Link to="/" className="flex items-center">
               <img
-                src="\src\assets\swiftbuy.png"
+                src="https://github.com/Amanroy7632/E-Commerce/blob/main/src/assets/swiftbuy.png?raw=true"
                 className="mr-3 h-12"
                 alt="Logo"
               />
