@@ -16,7 +16,7 @@ export const cartSlice = createSlice({
     reducers:{
         addToCart:(state,action)=>{
             let getIndex=state.cart.findIndex((item)=>(item.id === action.payload.id))
-            getIndex>=0?state.cart[getIndex].qty+=1:state.cart.push({...action.payload,qty:1})
+            getIndex>=0?state.cart[getIndex].qty+=1:state.cart.push({...action.payload,qty:1,date:Date.now()})
         },
         removeToCart:(state,action)=>{
             // console.log("Am Working");
@@ -40,10 +40,21 @@ export const cartSlice = createSlice({
             state.todos.filter((todo)=>{
                 return todo.id === action.payload?({...todo,qty:action.payload}):todo
             })
+        },
+        cmpBy:(a,b)=>{
+            return a.qty-b.qty;
+        }
+        ,
+        sortBy:(state,action)=>{
+             // TODO:Implementation of sorting function
+             const sortByField = action.payload; // Get the field to sort by from the payload
+            // Implement sorting logic based on the specified field
+            const sortedCart = [...state.cart].sort((a, b) => a[sortByField] - b[sortByField]);
+            return { ...state, cart: sortedCart };
         }
         
     }
 })
 // we need to export the functionality seprately 
-export const {addToCart,updateToCart,removeToCart,increaseQty,decreaseQty,checkPromoCode} =cartSlice.actions
+export const {addToCart,updateToCart,removeToCart,increaseQty,decreaseQty,checkPromoCode,sortBy} =cartSlice.actions
 export default cartSlice.reducer

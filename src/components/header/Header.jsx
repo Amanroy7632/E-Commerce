@@ -4,12 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faUserTie } from '@fortawesome/fontawesome-svg-core';
 import { faUserTie, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import Login from "../login/Login";
-import { CartState } from "../../context/Context";
+// import { CartState } from "../../context/Context";
 import { useSelector } from "react-redux";
 import ThemeButton from "../theme/ThemeButton";
 import "./header.css";
 function Header() {
-  const { state } = CartState();
+  // const { state } = CartState();
   const [visible, setVisible] = useState(false);
   const [active, setActive] = useState(false);
   const turnOnlogin = () => {

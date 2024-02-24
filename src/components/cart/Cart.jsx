@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDeleteLeft} from "@fortawesome/free-solid-svg-icons";
 import "../cart/cart.css";
 import { useSelector,useDispatch } from "react-redux";
-import { removeToCart,increaseQty,decreaseQty,checkPromoCode } from "../../features/cartSlice";
+import { removeToCart,increaseQty,decreaseQty,checkPromoCode,sortBy } from "../../features/cartSlice";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 const prevUsedPromoCode=[]
@@ -14,7 +14,8 @@ function Cart({ ItemData }) {
   const productId=useParams();
  
   const data = useSelector((state) => state.cartItem);
-  const items = data.cart;
+  let items = data.cart;
+  const dummyData=items;
   const dispatch = useDispatch()
   // console.log(items);
   const promoCodes=data.promoCode;
@@ -33,53 +34,79 @@ function Cart({ ItemData }) {
     e.preventDefault();
     dispatch(checkPromoCode(prmCode));
   }
+  const [option ,setOption]=useState("");
+  const optionHandler=()=>{
+    console.log(option);
+    setOption(option);
+  }
+  function compareTo(a,b){
+    return a.qty - b.qty;
+  }
+  useEffect(()=>{
+    
+    dispatch(sortBy(option));
+    setOption("")
+    console.log(items);
+    // items.length>0? dummyData.sort(compareTo):""
+  },[option])
   
   return (
     items.length>0?
     <div className="container-all dark:bg-black dark:border-gray-700 ">
     <div className="card dark:bg-black dark:border-gray-700">
       <div className="row dark:bg-black dark:border-gray-700">
-        <div className="col-md-8 cart dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+        <div className="col-md-8 cart dark:bg-gray-800 dark:border-red-700 dark:text-white w-full ">
           <div className="title">
-            <div className="row">
-              <div className="col">
+            <div className="row  flex flex-wrap h-1/12 overflow-hidden">
+              <div className="col w-1/2 ">
                 <h4>
                   <b>Your Cart</b>
                 </h4>
               </div>
-              <div className="col align-self-center text-right text-muted">
-                {items.length} items
+              <div className="col align-self-center text-right text-muted w-1/2 ">
+                {items.length} items 
+                <select name="" id="" className=" bg-transparent dark:bg-gray-800 dark:text-white w-auto outline-none border-none cursor-pointer"
+                onChange={(e)=>{ 
+                 setOption(e.target.value)}}  value={option}>
+                  <option value="">Sort By</option>
+                  <option value="price">Price</option>
+                  <option value="qty">Quantity</option>
+                  <option value="date">Date</option>
+                </select>
               </div>
             </div>
-          </div>{" "}
+          </div>
           {items.map((item, index) => (
-            <div className="row border-top border-bottom ">
-            <div className="row main align-items-center flex justify-evenly items-center border">
-              <div className="col-2">
+            <div className="row border-top border-bottom">
+            <div className="row main align-items-center flex justify-evenly items-center  border-b-2 border-blue-300 rounded-md max-sm:flex-col">
+              <div className="col-2 max-sm:w-full flex justify-center">
                 <Link to={`/products/${productId}/${item.title.replace('/','@')}/${item.id}`}>
                 <img
-                  className="img-fluid" style={{objectFit:"cover",aspectRatio:"1/1"}}
+                  className="img-fluid lg:w-28 max-sm:object-fill max-sm:m-0"
                   src={item.thumbnail}
                 />
                 </Link>
               </div>
-              <div className="col">
-                <div className="row text-muted">{item.title}</div>
-                <div className="row">{item.description?item.description.substr(0,30):""}</div>
-                <div className="row">{item.discountPercentage}% Off</div>
+              <div className="col ">
+                <div className="row text-muted max-sm:p-3">{item.title}</div>
+                <div className="row max-sm:hidden">{item.description?item.description.substr(0,30):""}</div>
+                <div className="row max-sm:hidden">{item.discountPercentage}% Off</div>
               </div>
-              <div className="col">
-                <span onClick={()=>{dispatch(decreaseQty(item))}}className=" cursor-pointer text-3xl p-3" >-</span>
-                <span  className="  cursor-pointer text-2xl p-3">
+              <div className="col ">
+                <span onClick={()=>{dispatch(decreaseQty(item))}}className=" cursor-pointer text-3xl p-3 " >-</span>
+                <span  className="  cursor-pointer text-xl px-3 py-1 border rounded-xl">
                   {item.qty}
                 </span>
                 <span onClick={()=>{dispatch(increaseQty(item))}} className=" cursor-pointer text-3xl p-3">+</span>
               </div>
-              <div className="col">
-                &euro; {item.price * item.qty}<span className="close p-4">
+              <div className="col   max-sm:flex max-sm:justify-between">
+               <span className="max-sm:flex max-sm:justify-center max-sm:items-center ">
+                 &euro; {item.price * item.qty}</span>
+               <span className="close p-4">
                 <FontAwesomeIcon icon={faDeleteLeft} 
                 onClick={()=>{dispatch(removeToCart(item.id))}}
-                   className=" text-3xl text-red-700 cursor-pointer"/></span>
+                   className=" text-3xl text-red-700 cursor-pointer  max-sm:my-1"/>
+                </span>
               </div>
             </div>
           </div>

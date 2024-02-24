@@ -1,6 +1,6 @@
 
 .title{
-    margin-bottom: 5vh;
+    margin-bottom: 1vh;
 }
 .card{
     font-family: sans-serif;
@@ -18,6 +18,7 @@
 }
 .cart{
     background-color: #fff;
+    /* border: 2px solid red; */
     padding: 4vh 5vh;
     border-bottom-left-radius: 1rem;
     border-top-left-radius: 1rem;
@@ -41,6 +42,16 @@
     border-top-right-radius: unset;
     border-bottom-left-radius: 1rem;
     }
+}
+@media(min-width:480px) {
+    .img-fluid{
+        /* width: 17rem; */
+        /* height: 7rem; */
+        object-fit: cover;
+        /* aspect-ratio: 3/4; */
+        background-blend-mode:darken;
+    }
+   
 }
 .summary .col-2{
     padding: 0;
@@ -71,6 +82,8 @@ a{
 }
 .img-fluid{
     width: 7rem;
+    object-fit: cover;
+    aspect-ratio: 1/1;
     background-blend-mode:darken;
 }
 .back-to-shop{
