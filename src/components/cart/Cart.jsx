@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 // import Item from "./Item";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDeleteLeft, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faDeleteLeft, faTrash,faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import "../cart/cart.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -67,29 +67,29 @@ function Cart({ ItemData }) {
             >
               Your Cart
             </h2>
-            <div className=" w-1/6 flex justify-between items-center">
-            <div className="ml-3 flex h-7 items-center">
-              {/* <span className="">ITEMS: {items.length}</span> */}
-            
-              <span className="-inset-0.5 text-gray-400 hover:text-gray-500 w-full">
-                Items: {items.length}
-              </span>
-              <select
-                name=""
-                id=""
-                className=" bg-transparent dark:bg-black -inset-0.5 dark:text-white  outline-none border-none cursor-pointer text-sm p-0 m-0"
-                onChange={(e) => {
-                  setOption(e.target.value);
-                }}
-                value={option}
-              >
-                <option value="">Sort By</option>
-                <option value="price">Price</option>
-                <option value="qty">Quantity</option>
-                <option value="date">Date</option>
-              </select>
+            <div className=" w-1/6 flex justify-between items-center max-sm:w-1/2 max-sm:justify-around">
+              <div className="ml-3 flex h-7 items-center">
+                {/* <span className="">ITEMS: {items.length}</span> */}
 
-              {/* <button
+                <span className="-inset-0.5 text-gray-400 hover:text-gray-500 w-full">
+                  {items.length} items
+                </span>
+                <select
+                  name=""
+                  id=""
+                  className=" bg-transparent dark:bg-black -inset-0.5 dark:text-white  outline-none border-none cursor-pointer text-sm p-0 m-0"
+                  onChange={(e) => {
+                    setOption(e.target.value);
+                  }}
+                  value={option}
+                >
+                  <option value="">Sort By</option>
+                  <option value="price">Price</option>
+                  <option value="qty">Quantity</option>
+                  <option value="date">Date</option>
+                </select>
+
+                {/* <button
                 type="button"
                 className="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
               >
@@ -110,7 +110,7 @@ function Cart({ ItemData }) {
                   />
                 </svg>
               </button> */}
-            </div>
+              </div>
             </div>
           </div>
 
@@ -121,52 +121,109 @@ function Cart({ ItemData }) {
                 className="-my-6 divide-y divide-gray-200 dark:bg-gray-700 dark:text-white rounded-lg"
               >
                 {items.map((item, index) => (
-                  <li className="flex py-6 lg:px-6 ">
-                    <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md  dark:border-gray-200">
+                  <li className="flex py-6 lg:px-6 max-sm:px-4">
+                    <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md  dark:border-gray-200  ">
                       <img
                         src={item.thumbnail}
                         alt={item.thumbnail}
-                        className="h-full w-full object-cover object-center"
+                        className="h-full w-full object-cover object-center duration-200 hover:h-32 hover:w-32"
                       />
                     </div>
 
                     <div className="ml-4 flex flex-1 flex-col">
-                      <div>
-                        <div className="flex justify-between text-base font-medium dark:text-white">
+                      <div className="">
+                        <div className="flex justify-between text-base font-medium dark:text-white max-sm:flex-col">
                           <h3>
-                            <a href="#" className="dark:text-white">
+                            <Link
+                              to={`/products/${productId}/${item.title.replace(
+                                "/",
+                                "@"
+                              )}/${item.id}`}
+                              className="dark:text-white"
+                            >
                               {item.title}
-                            </a>
+                            </Link>
                           </h3>
-                          <p className="ml-4 ">$ {item.price * item.qty}</p>
+                          <p className="ml-4 px-3 max-sm:px-0 max-sm:ml-2">$ {item.price * item.qty}</p>
                         </div>
-                        <p className="mt-1 text-sm text-gray-500 dark:text-white">
+                        <div className="flex items-center mt-2.5 mb-5 ml-2">
+                          <svg
+                            className="w-4 h-4 text-yellow-300 mr-1"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor"
+                            viewBox="0 0 22 20"
+                          >
+                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                          </svg>
+                          <svg
+                            className="w-4 h-4 text-yellow-300 mr-1"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor"
+                            viewBox="0 0 22 20"
+                          >
+                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                          </svg>
+                          <svg
+                            className="w-4 h-4 text-yellow-300 mr-1"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor"
+                            viewBox="0 0 22 20"
+                          >
+                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                          </svg>
+                          <svg
+                            className="w-4 h-4 text-yellow-300 mr-1"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor"
+                            viewBox="0 0 22 20"
+                          >
+                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                          </svg>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 576 512"
+                            className="w-4 h-4 text-yellow-300 mr-1"
+                            fill="currentColor"
+                          >
+                            <path d="M309.5 13.5C305.5 5.2 297.1 0 287.9 0s-17.6 5.2-21.6 13.5L197.7 154.8 44.5 177.5c-9 1.3-16.5 7.6-19.3 16.3s-.5 18.1 5.9 24.5L142.2 328.4 116 483.9c-1.5 9 2.2 18.1 9.7 23.5s17.3 6 25.3 1.7l137-73.2 137 73.2c8.1 4.3 17.9 3.7 25.3-1.7s11.2-14.5 9.7-23.5L433.6 328.4 544.8 218.2c6.5-6.4 8.7-15.9 5.9-24.5s-10.3-14.9-19.3-16.3L378.1 154.8 309.5 13.5zM288 384.7V79.1l52.5 108.1c3.5 7.1 10.2 12.1 18.1 13.3l118.3 17.5L391 303c-5.5 5.5-8.1 13.3-6.8 21l20.2 119.6L299.2 387.5c-3.5-1.9-7.4-2.8-11.2-2.8z" />
+                          </svg>
+                          <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
+                            {item.rating}
+                          </span>
+                        </div>
+                        <p className="mt-1 text-sm text-gray-500 dark:text-white ml-2 max-sm:hidden">
+                          {item.description}
+                        </p>
+                        <p className="mt-1 text-sm text-gray-300  ml-2">
                           {item.discountPercentage}% Off
                         </p>
                       </div>
-                      <div className="flex flex-1 items-end lg:items-center  justify-between text-sm">
+                      <div className="flex flex-1 items-center justify-between text-sm ">
                         <div className="col ">
                           <span
                             onClick={() => {
                               dispatch(decreaseQty(item));
                             }}
-                            className=" cursor-pointer text-3xl p-3"
+                            className=" cursor-pointer text-3xl p-3 max-sm:p-1"
                           >
                             -
                           </span>
-                          <span className="  cursor-pointer text-xl px-3 text-gray-400 py-1 border rounded-xl">
+                          <span className="  cursor-pointer text-xl px-3 text-gray-400 py-1  rounded-xl max-sm:p-1">
                             {item.qty}
                           </span>
                           <span
                             onClick={() => {
                               dispatch(increaseQty(item));
                             }}
-                            className=" cursor-pointer text-3xl p-3"
+                            className=" cursor-pointer text-3xl p-3 max-sm:p-1"
                           >
                             +
                           </span>
                         </div>
-                        
 
                         <div className="flex">
                           {/* <button
@@ -175,14 +232,15 @@ function Cart({ ItemData }) {
                           >
                             Remove
                           </button> */}
-                          <span className="close p-4">
+                          <span className="close px-3 text-2xl cursor-pointer  max-sm:my-1  rounded-lg focus:ring-red-400"
+                          onClick={() => {
+                            dispatch(removeToCart(item.id));
+                          }}>
                             <FontAwesomeIcon
-                              icon={faTrash}
-                              onClick={() => {
-                                dispatch(removeToCart(item.id));
-                              }}
-                              className=" text-3xl text-red-700 cursor-pointer  max-sm:my-1"
-                            />
+                              icon={faTrashCan}
+                              
+                              className=" text-red-700 text-lg max-sm:text-sm"
+                            />&nbsp;<span className="text-lg max-sm:text-sm">Remove</span>
                           </span>
                         </div>
                       </div>
@@ -192,12 +250,12 @@ function Cart({ ItemData }) {
                   //   <div className="row border-top border-bottom">
                   //   <div className="row main align-items-center flex justify-evenly items-center  border-b-2 border-blue-300 rounded-md max-sm:flex-col">
                   //     <div className="col-2 max-sm:w-full flex justify-center">
-                  //       <Link to={`/products/${productId}/${item.title.replace('/','@')}/${item.id}`}>
-                  //       <img
-                  //         className="img-fluid lg:w-28 max-sm:object-fill max-sm:m-0"
-                  //         src={item.thumbnail}
-                  //       />
-                  //       </Link>
+                  // <Link to={`/products/${productId}/${item.title.replace('/','@')}/${item.id}`}>
+                  // <img
+                  //   className="img-fluid lg:w-28 max-sm:object-fill max-sm:m-0"
+                  //   src={item.thumbnail}
+                  // />
+                  // </Link>
                   //     </div>
                   //     <div className="col ">
                   //       <div className="row text-muted max-sm:p-3">{item.title}</div>
@@ -233,19 +291,20 @@ function Cart({ ItemData }) {
         <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
           <div className="flex justify-between text-base font-medium text-gray-900">
             <p className=" dark:text-white">Subtotal</p>
-            <p>
-              &euro;{" "}
+            <p className=" dark:text-white">
+              {/* &euro; */}
+              ${" "}
               {items.reduce((acc, item) => acc + item.price * item.qty, 0)}
             </p>
           </div>
           <p className="mt-0.5 text-sm text-gray-500 dark:text-white">
             Shipping and taxes calculated at checkout.
           </p>
-          <form className="dark:text-black" > 
+          <form className="dark:text-black">
             <p className=" dark:text-white">SHIPPING COST</p>
-            <select >
+            <select>
               <option className="text-muted ">
-                Standard-Delivery- &euro;5.00
+                Standard-Delivery- $ 5.00
               </option>
             </select>
             <p className=" dark:text-white">GIVE CODE</p>
@@ -288,9 +347,11 @@ function Cart({ ItemData }) {
       <CheckOutStepper />
     </div>
   ) : (
-    <div>
-      <h1>Your Cart is Empty</h1>
-    </div>
+    <div className="dark:bg-black p-10">
+    <h2 className="text-2xl font-semibold mb-4 dark:text-white text-black">Your cart is empty</h2>
+    <p className="text-gray-700 mb-4 dark:text-white">Add something to your cart.</p>
+    <Link to={"/category"} className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300 ease-in-out" >Add Item</Link>
+  </div>
   );
   // <div className="container-all dark:bg-black dark:border-gray-700 ">
   // <div className="card dark:bg-black dark:border-gray-700">
