@@ -41,3 +41,11 @@
 body{
     transition: all 0.3s ease-in-out;
 }
+/* .navbar-links{
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    transition: all 0.3s ease-in-out;
+}
+.navbar-links :hover{
+    text-decoration-color: brown;
+} */

@@ -40,6 +40,7 @@ import { fetchProductData } from "./components/category/Category";
 import ShoppingCart from "./components/cart/ShoppingCart";
 import ItemData from "./components/cart/ItemData";
 import Products from "./components/category/Products";
+import NewCart from "./components/cart/NewCart";
 const data={
   products:[1,2,3,4,4]
 }
@@ -49,7 +50,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<Layout />}>
       <Route path="" element={<Home />} />
       <Route path="category" element={<Category />} 
-      loader={fetchProductData}
+      // loader={fetchProductData}
       >
         {/* Render nested routes within the Category component */}
         {/* <Route path="products" element={<Outlet />}> */}
@@ -60,11 +61,12 @@ const router = createBrowserRouter(
       <Route path="home/products/:productId" element={<ProductDetail />} />
       <Route path="products/:productId" element={<Products />} />
       <Route path="products/:productId/:title/:id" element={<ProductDetail />} />
-      <Route path="about" element={<About />} />
+      <Route path="about" element={<NewCart />} />
       <Route path="contact" element={<Contact />} />
       <Route path="user/:userId" element={<User />} />
       <Route path="github" element={<Github />} loader={fetchGithubData} />
       <Route path="cart" element={<Cart ItemData={ItemData} />} />
+      {/* <Route path="cart" element={<NewCart/>} /> */}
     </Route>
   )
 );

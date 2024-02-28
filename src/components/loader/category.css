@@ -70,3 +70,8 @@
     box-shadow: .2em -.2em 0 0 currentcolor;
   }
 }
+@media (min-width: 480px) {
+  .loader-container{
+    justify-content: space-around;
+  }
+}

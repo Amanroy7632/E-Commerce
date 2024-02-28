@@ -45,8 +45,8 @@
 }
 @media(min-width:480px) {
     .img-fluid{
-        /* width: 17rem; */
-        /* height: 7rem; */
+        width: 17rem;
+        /* height: 17rem; */
         object-fit: cover;
         /* aspect-ratio: 3/4; */
         background-blend-mode:darken;
@@ -153,3 +153,4 @@ a:hover{
     background-position-x: 95%;
     background-position-y: center;
 }
+
