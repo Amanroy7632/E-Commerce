@@ -133,21 +133,21 @@ function Home() {
   return (
     <div className="p-items w-full  overflow-y-auto overflow-x-hidden dark:bg-black dark:text-white">
       <Slider {...setting}>
-        <div>
+        <div className="">
           <img src={Himage2} className=" " alt="Pic" />
         </div>
-        <div>
+        <div className="">
           {" "}
           <img src={Himage1} className=" " alt="" />
         </div>
-        <div>
+        <div className="">
           {" "}
           <img src={Himage3} className=" " alt="" />
         </div>
-        <div>
+        <div className="">
           <img src={Himage4} className=" " alt="" />
         </div>
-        <div>
+        <div className="">
           {" "}
           <img
             src="https://img1.junaroad.com//assets/images/mobileNotif/img-1692595725646.jpg?crsl_pos=5"

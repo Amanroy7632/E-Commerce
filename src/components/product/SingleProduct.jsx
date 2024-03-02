@@ -12,28 +12,28 @@ function SingleProduct({ product }) {
     <div
     
       key={product.id}
-      className="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 "
+      className="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
     >
       
       <Link to={`home/products/${product.id}`}>
         <img
-          className="p-8 rounded-t-lg  aspect-square m-auto"
+          className="p-8 rounded-t-lg w-4/5 aspect-square m-auto max-sm:p-0 max-sm:rounded-lg max-sm:w-2/3"
           src={product["thumbnail"]}
           alt="product_image1"
           style={{
-            width: "80%",
+            // width: "80%",
             backgroundBlendMode: "color-burn",
-            objectFit: "cover",
+            objectFit:"cover",
           }}
         />
       </Link>
-      <div className="px-5 pb-5">
-        <a href="/">
-          <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+      <div className="px-5 pb-5 max-sm:pb-3  max-sm:pt-0">
+        {/* <a href="/"> */}
+          <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white max-sm:pt-0">
             {product.title}
           </h5>
-        </a>
-        <div className="flex items-center mt-2.5 mb-5">
+        {/* </a> */}
+        <div className="flex items-center mt-2.5 mb-5 max-sm:mt-1.2 max-sm:mb-1">
           <svg
             className="w-4 h-4 text-yellow-300 mr-1"
             aria-hidden="true"

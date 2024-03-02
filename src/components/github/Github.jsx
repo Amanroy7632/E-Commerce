@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import Loader from '../loader/Loader'
 function Github() {
     const data=useLoaderData()
-    console.log(data);
+    // console.log(data);
    
     const openDownlaodLink=()=>{
         // window.location.href=data.repos_url;

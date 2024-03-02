@@ -8,8 +8,8 @@ import { useLoaderData } from "react-router-dom";
 function Category() {
   const {product,error,loading,errorMessage}=fetchProData("https://dummyjson.com/carts")
   
-  console.log(product);
-  console.log(errorMessage);
+  // console.log(product);
+  // console.log(errorMessage);
   const repoData=product;
   // setTimeout(()=>{
   //   console.log(product);

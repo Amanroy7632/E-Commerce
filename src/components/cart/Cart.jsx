@@ -115,7 +115,7 @@ function Cart({ ItemData }) {
           </div>
 
           <div className="mt-8">
-            <div className="flow-root ">
+            <div className="flow-root row-span-1 ">
               <ul
                 role="list"
                 className="-my-6 divide-y divide-gray-200 dark:bg-gray-700 dark:text-white rounded-lg"

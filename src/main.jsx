@@ -61,7 +61,7 @@ const router = createBrowserRouter(
       <Route path="home/products/:productId" element={<ProductDetail />} />
       <Route path="products/:productId" element={<Products />} />
       <Route path="products/:productId/:title/:id" element={<ProductDetail />} />
-      <Route path="about" element={<NewCart />} />
+      <Route path="about" element={<About />} />
       <Route path="contact" element={<Contact />} />
       <Route path="user/:userId" element={<User />} />
       <Route path="github" element={<Github />} loader={fetchGithubData} />

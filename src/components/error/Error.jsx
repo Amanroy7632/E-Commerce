@@ -1,11 +1,10 @@
 import React from 'react'
-import wifiImg from './wifi.png'
 function Error({errorMessage}) {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
         
       <div className="max-w-md w-full bg-white shadow-lg rounded-lg p-8 transform transition-transform duration-500 hover:scale-105 flex flex-col items-center dark:bg-gray-700">
-      <img src={wifiImg} className=' w-2/3' alt="Error png" />
+      <img src="https://github.com/Amanroy7632/E-Commerce/blob/main/src/components/error/wifi.png?raw=true" className=' w-2/3' alt="Error png" />
         <h1 className="text-2xl font-semibold mb-4 text-red-600">{errorMessage.errorMessage}</h1>
         <p className="text-gray-700 mb-8 dark:text-white">You're offline. Check your connection.</p>
         <button onClick={()=>{
