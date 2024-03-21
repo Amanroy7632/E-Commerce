@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { addToCart,removeToCart } from '../../features/cartSlice';
 import { useSelector,useDispatch } from 'react-redux';
 import Loader from '../loader/Loader';
+import toast from 'react-hot-toast';
 const ProductDetail = () => {
     const dataList=useSelector(state=>state.cartItem);
     const dispatch=useDispatch();
@@ -110,14 +111,16 @@ const ProductDetail = () => {
             <button className="bg-red-500 hover:bg-red-600 text-white  flex justify-center items-center font-semibold py-2 px-4 rounded-md mt-9"
             onClick={(e)=>{
               e.preventDefault();
-              dispatch(removeToCart(product[0].id))}}>
+              dispatch(removeToCart(product[0].id));
+              toast.error("Item removed Successfully")}}>
              Remove From Cart
         </button>
            ):(
                 <button className="bg-green-500 hover:bg-green-600 text-white flex justify-center items-center font-semibold py-2 px-4 rounded-md mt-9"
           onClick={(e)=>{
             e.preventDefault();
-            dispatch(addToCart(product[0]))}}>
+            dispatch(addToCart(product[0]))
+            toast.success("Item added Successfully")}}>
         Add to Cart
       </button>
             )

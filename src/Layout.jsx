@@ -6,6 +6,8 @@ import Footer from './components/footer/Footer'
 import { Provider } from 'react-redux'
 import { store } from './app/store'
 import { ThemeContextProvider } from './context/theme'
+import {ToastContainer} from 'react-toastify'
+import { Toaster } from 'react-hot-toast'
 function Layout() {
   const [themeMode,setThemeMode]=useState("light")
   const lightTheme=()=>{
@@ -25,6 +27,8 @@ function Layout() {
     <Context>
       <Provider store={store}>
     <Header/>
+    <Toaster/>
+     
     <Outlet /> {/* {it uses header and footer as a base and put inputs dinamically} */}
     <Footer/>
     </Provider>

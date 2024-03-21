@@ -4,6 +4,7 @@ import { useParams,Link } from "react-router-dom";
 import { useSelector,useDispatch } from 'react-redux';
 import { addToCart,removeToCart } from '../../features/cartSlice';
 import Loader from '../loader/Loader';
+import toast from 'react-hot-toast';
 function Products() {
   let a="Aman"
   
@@ -109,6 +110,7 @@ function Products() {
                <a
                onClick={() => {
                  dispatch(removeToCart(data.id));
+                 toast.error("Item removed from cart.")
                }}
                className="  text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-500 dark:hover:bg-red-700 dark:focus:ring-red-800 cursor-pointer"
              >
@@ -118,6 +120,7 @@ function Products() {
                 <a
                 onClick={() => {
                   dispatch(addToCart(data));
+                  toast.success("Item added successfully")
                 }}
                 className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 cursor-pointer"
               >

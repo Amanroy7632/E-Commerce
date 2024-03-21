@@ -41,6 +41,7 @@ import ShoppingCart from "./components/cart/ShoppingCart";
 import ItemData from "./components/cart/ItemData";
 import Products from "./components/category/Products";
 import NewCart from "./components/cart/NewCart";
+
 const data={
   products:[1,2,3,4,4]
 }
@@ -73,6 +74,8 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+ 
     <RouterProvider router={router} />
+   
   </React.StrictMode>
 );
