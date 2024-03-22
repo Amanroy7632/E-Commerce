@@ -13,12 +13,12 @@ function SingleProduct({ product }) {
     <div
     
       key={product.id}
-      className="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+      className="w-full  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
     >
       
-      <Link to={`home/products/${product.id}`}>
+      <Link to={`home/products/${product.id}`} >
         <img
-          className="p-8 rounded-t-lg w-4/5 aspect-square m-auto max-sm:p-0 max-sm:rounded-lg max-sm:w-2/3"
+          className=" rounded-t-lg w-4/5 aspect-square m-auto max-sm:p-0 max-sm:rounded-lg max-sm:w-2/3"
           src={product["thumbnail"]}
           alt="product_image1"
           style={{
