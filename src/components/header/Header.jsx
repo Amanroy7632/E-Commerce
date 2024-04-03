@@ -8,6 +8,12 @@ import Login from "../login/Login";
 import { useSelector } from "react-redux";
 import ThemeButton from "../theme/ThemeButton";
 import "./header.css";
+import { BiHome } from "react-icons/bi";
+import { BiUser } from "react-icons/bi";
+import { BiSolidContact } from "react-icons/bi";
+import { FaGithub } from "react-icons/fa";
+import { BiSearch } from "react-icons/bi";
+import { BiLogoProductHunt } from "react-icons/bi";
 function Header() {
   // const { state } = CartState();
   const [visible, setVisible] = useState(false);
@@ -24,20 +30,24 @@ function Header() {
     const menuBar = document.querySelector(".menu-bar");
     menuBar.classList.toggle("active");
     setActive(!active);
-    links=document.querySelectorAll("#navlinks")
+    links = document.querySelectorAll("#navlinks");
     // console.log(menuBar);
   };
-  const hideNavigationHandler=(e)=>{
+  const hideNavigationHandler = (e) => {
     e.preventDefault();
     const menuBar = document.querySelector(".menu-bar");
     menuBar.classList.toggle("active");
     setActive(!active);
-
+  };
+  const [showHeader,setShowHeader] =useState(true);
+  const handleScroll=()=>{
+     setShowHeader(!showHeader);
   }
 
   return (
     <>
-      <header className=" sticky z-50 top-0 text-gray-900 dark:text-white dark:bg-gray-900 backdrop-blur-md">
+      {
+       showHeader? <header className=" sticky z-50 top-0  text-gray-900 dark:text-white dark:bg-gray-900 backdrop-blur-md">
         <nav className=" border-gray-200 px-4 lg:px-6 py-2.5  dark:bg-black dark:border-gray-700">
           <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
             <Link to="/" className="flex items-center">
@@ -51,13 +61,13 @@ function Header() {
               <Link
                 // to="/Login"
                 onClick={turnOnlogin}
-                className=" max-lg:hidden text-gray-800 dark:hover:bg-black hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none dark:text-white"
+                className=" text-gray-800 dark:hover:bg-black hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 max-sm:px-2 py-2 lg:py-2.5 mr-2 max-md:mr-0 focus:outline-none dark:text-white"
               >
                 Log in
               </Link>
               <Link
                 to="/cart"
-                className="max-lg:hidden text-white   bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none dark:text-white "
+                className="font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 max-sm:px-1 ml-1 max-md:mr-0 focus:outline-none dark:text-white "
               >
                 {/* Get started */}
                 <FontAwesomeIcon icon={faShoppingCart} />
@@ -65,7 +75,7 @@ function Header() {
                   {items.length}
                 </sup>
               </Link>
-              <div
+              {/* <div
                 className="menu-bar flex justify-between flex-col cursor-pointer mr-4 lg:hidden"
                 style={{
                   height: "24px",
@@ -77,8 +87,10 @@ function Header() {
                 <span className=" bg-black dark:bg-white rounded-sm"></span>
                 <span className=" bg-black dark:bg-white rounded-sm"></span>
                 <span className=" bg-black dark:bg-white rounded-sm"></span>
+              </div> */}
+              <div className=" flex max-sm:hidden">
+                <ThemeButton />
               </div>
-              <ThemeButton />
             </div>
             <div
               className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
@@ -159,94 +171,102 @@ function Header() {
             </div>
           </div>
         </nav>
-      </header>
-      {active?(<div className=" navbarActive bg-white/30 dark:text-white flex border w-1/3 justify-center fixed right-0 z-20 backdrop-blur-sm">
-        <ul>
-        <li id="navlinks" onClick={hideNavigationHandler}> <NavLink
-                    to="/"
-                    className={({ isActive }) =>
-                      `block py-2 pr-4 pl-3 duration-200 ${
-                        isActive
-                          ? "text-orange-700 "
-                          : "text-gray-700 dark:text-white "
-                      }  border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0 `
-                    }
-                  >
-                    Home
-                  </NavLink></li>
-        <li id="navlinks" onClick={hideNavigationHandler}> <NavLink
-                    to="/category"
-                    className={({ isActive }) =>
-                      `block py-2 pr-4 pl-3 duration-200 ${
-                        isActive
-                          ? "text-orange-700"
-                          : "text-gray-700 dark:text-white"
-                      }  border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0 `
-                    }
-                  >
-                    Category
-                  </NavLink></li>
-        <li id="navlinks" onClick={hideNavigationHandler}><NavLink
-                    to="/about"
-                    className={({ isActive }) =>
-                      `block py-2 pr-4 pl-3 duration-200 ${
-                        isActive
-                          ? "text-orange-700"
-                          : "text-gray-700 dark:text-white"
-                      }  border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0 `
-                    }
-                  >
-                    About
-                  </NavLink></li>
-        <li id="navlinks" onClick={hideNavigationHandler}><NavLink
-                    to="/contact"
-                    className={({ isActive }) =>
-                      `block py-2 pr-4 pl-3 duration-200 ${
-                        isActive
-                          ? "text-orange-700"
-                          : "text-gray-700 dark:text-white"
-                      }  border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0 `
-                    }
-                  >
-                    Contact
-                  </NavLink></li>
-        <li id="navlinks" onClick={hideNavigationHandler}><NavLink
-                    to="/github"
-                    className={({ isActive }) =>
-                      `block py-2 pr-4 pl-3 duration-200 ${
-                        isActive
-                          ? "text-orange-700"
-                          : "text-gray-700 dark:text-white"
-                      }  border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0 `
-                    }
-                  >
-                    Github
-                  </NavLink></li>
-        <li id="navlinks" onClick={hideNavigationHandler} ><NavLink
-                    to={"/login"}
-                    className={({ isActive }) =>
-                      `block py-2 pr-4 pl-3 duration-200 ${
-                        isActive
-                          ? "text-orange-700"
-                          : "text-gray-700 dark:text-white"
-                      }  border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0 `
-                    }
-                  >
-                    Login
-                  </NavLink></li>
-        <li id="navlinks" onClick={hideNavigationHandler}>
-             <Link
-                to="/cart"
-                className="     hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none dark:text-white "
+      </header>:""
+      }
+      <input type="text" name="" id="" placeholder="Q Search for Products,Brands and more" className=" px-4 py-4 dark:bg-black dark:text-white text-xl hidden max-md:flex justify-center items-center sticky top-0 z-50  bg-slate-200" />
+      {/* <div className=" hidden h-[5rem] max-md:flex justify-center items-center sticky top-0 z-50  bg-gray-300">
+        <input type="text" className=" w-[90%]" />
+        <button className=" w-1/4"><BiSearch className=" text-3xl" /></button>
+        <div className=" absolute right-0  top-0 p-1.5 backdrop-blur-xl">
+          <BiSearch className=" text-3xl" />
+        </div>
+      </div> */}
+      {
+        <div className=" hidden  bg-white dark:bg-black dark:text-white max-md:flex  w-full h-[3rem] justify-center fixed bottom-0 z-20 backdrop-blur-lg font-bold">
+          <ul className=" flex justify-center items-center ">
+            <li id="navlinks" onClick={hideNavigationHandler}>
+              {" "}
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  `block  duration-200 w-full ${
+                    isActive
+                      ? "text-orange-700 "
+                      : "text-gray-700 dark:text-white "
+                  } hover:text-orange-700 lg:p-0 `
+                }
               >
-                {/* Get started */}
-                <FontAwesomeIcon icon={faShoppingCart} />
-                <sup className=" text-lg p-1 ">
-                  {items.length}
-                </sup>
-              </Link></li>
-      </ul>
-      </div>):""}
+                {/* Home */}
+                <BiHome className=" w-[2rem] h-[2rem]" />
+              </NavLink>
+            </li>
+            <li id="navlinks" onClick={hideNavigationHandler}>
+              {" "}
+              <NavLink
+                to="/category"
+                className={({ isActive }) =>
+                  `block py-2 pr-4 pl-3 duration-200 ${
+                    isActive
+                      ? "text-orange-700"
+                      : "text-gray-700 dark:text-white"
+                  }    hover:text-orange-700 lg:p-0 `
+                }
+              >
+                {/* Category */}
+                <BiLogoProductHunt className=" w-[2rem] h-[2rem]" />
+              </NavLink>
+            </li>
+            <li id="navlinks" onClick={hideNavigationHandler}>
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  `block py-2 pr-4 pl-3 duration-200 ${
+                    isActive
+                      ? "text-orange-700"
+                      : "text-gray-700 dark:text-white"
+                  }   hover:text-orange-700 lg:p-0 `
+                }
+              >
+                {/* About */}
+                <BiUser className=" w-[2rem] h-[2rem]" />
+              </NavLink>
+            </li>
+            <li id="navlinks" onClick={hideNavigationHandler}>
+              <NavLink
+                to="/contact"
+                className={({ isActive }) =>
+                  `block py-2 pr-4 pl-3 duration-200 ${
+                    isActive
+                      ? "text-orange-700"
+                      : "text-gray-700 dark:text-white"
+                  }   hover:text-orange-700 lg:p-0 `
+                }
+              >
+                {/* Contact */}
+                <BiSolidContact className=" w-[2rem] h-[2rem]" />
+              </NavLink>
+            </li>
+            <li id="navlinks" onClick={hideNavigationHandler}>
+              <NavLink
+                to="/github"
+                className={({ isActive }) =>
+                  `block py-2 pr-4 pl-3 duration-200 ${
+                    isActive
+                      ? "text-orange-700"
+                      : "text-gray-700 dark:text-white"
+                  }  hover:text-orange-700 lg:p-0 `
+                }
+              >
+                {/* Github */}
+                <FaGithub className=" w-[2rem] h-[2rem]" />
+              </NavLink>
+            </li>
+            <li className="flex">
+              <ThemeButton />
+            </li>
+          </ul>
+        </div>
+      }
       {visible ? (
         <div
           className="login-container w-34px h-1/2 z-40 fixed top-20 left-1/4 bg-orange-900 "
