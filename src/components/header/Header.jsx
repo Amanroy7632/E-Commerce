@@ -14,6 +14,7 @@ import { BiSolidContact } from "react-icons/bi";
 import { FaGithub } from "react-icons/fa";
 import { BiSearch } from "react-icons/bi";
 import { BiLogoProductHunt } from "react-icons/bi";
+import {AiOutlineHome,AiOutlineAppstore} from "react-icons/ai"
 function Header() {
   // const { state } = CartState();
   const [visible, setVisible] = useState(false);
@@ -197,7 +198,7 @@ function Header() {
                 }
               >
                 {/* Home */}
-                <BiHome className=" w-[2rem] h-[2rem]" />
+                <AiOutlineHome className=" w-[2rem] h-[2rem]"/>
               </NavLink>
             </li>
             <li id="navlinks" onClick={hideNavigationHandler}>
@@ -213,7 +214,7 @@ function Header() {
                 }
               >
                 {/* Category */}
-                <BiLogoProductHunt className=" w-[2rem] h-[2rem]" />
+                <AiOutlineAppstore  className=" w-[2rem] h-[2rem]"/>
               </NavLink>
             </li>
             <li id="navlinks" onClick={hideNavigationHandler}>

@@ -1,11 +1,15 @@
 import { React, useEffect, useState } from "react";
 import Slider from "react-slick";
-import Himage1 from "./HomeImage/first.png";
-import Himage2 from "./HomeImage/second.png";
-import Himage3 from "./HomeImage/third.png";
-import Himage4 from "./HomeImage/fourth.png";
+import Himage1 from "./images/first.png";
+import Himage2 from "./images/second.png";
+import Himage3 from "./images/banner-3.jpg";
+import Himage4 from "./images/fourth.png";
+import Himage5 from "./images/banner-1.jpg";
+import Himage6 from "./images/banner-2.jpg";
+import Testimonial from "../testimonial/Testimonial";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Slide from "./slide/Slide";
 import  { CartState } from "../../context/Context";
 // import useCart, { cartContextProvider } from '../../context/cartContext'
 import SingleProduct from "../product/SingleProduct";
@@ -78,38 +82,40 @@ function Home() {
   // const {products} = useCart();
   let setting = {
     
-    dots: true,
     infinite: true,
+    autoplay:true,
+    pauseOnHover: false, 
     speed: 1000,
     slideToShow: 2,
     initialSlide: 0,
     slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
+    // dots: true,
+    // responsive: [
+    //   {
+    //     breakpoint: 1024,
+    //     settings: {
+    //       slidesToShow: 3,
+    //       slidesToScroll: 3,
+    //       infinite: true,
+    //       dots: true,
+    //     },
+    //   },
+    //   {
+    //     breakpoint: 600,
+    //     settings: {
+    //       slidesToShow: 2,
+    //       slidesToScroll: 2,
+    //       initialSlide: 2,
+    //     },
+    //   },
+    //   {
+    //     breakpoint: 480,
+    //     settings: {
+    //       slidesToShow: 1,
+    //       slidesToScroll: 1,
+    //     },
+    //   },
+    // ],
   };
   const addToCart = (product) => {
     setProduct((prevProduct) => {
@@ -129,11 +135,42 @@ function Home() {
     addToCart(product);
     console.log(product);
   };
- 
+  const slideData=[
+    {
+      id:1,
+      title:"Women's latest fashion sale",
+      price:349,
+      imgSrc:Himage6
+    },
+    {
+      id:2,
+      title:"",
+      price:789,
+      imgSrc:Himage5
+    },
+    {
+      id:3,
+      title:"",
+      price:199,
+      imgSrc:Himage3
+    },
+    {
+      id:4,
+      title:"",
+      price:139,
+      imgSrc:Himage4
+    }
+  ]
   return (
     <div className="p-items w-full  overflow-y-auto overflow-x-hidden dark:bg-black dark:text-white">
+      <div className=" lg:w-[95%] m-auto md:w-full">
       <Slider {...setting}>
-        <div className="">
+        {
+          slideData.map((data)=>(
+            <Slide key={data.id} data={data}/>
+          ))
+        }
+        {/* <div className="">
           <img src={Himage2} className=" " alt="Pic" />
         </div>
         <div className="">
@@ -153,11 +190,12 @@ function Home() {
             src="https://img1.junaroad.com//assets/images/mobileNotif/img-1692595725646.jpg?crsl_pos=5"
             alt=""
           />
-        </div>
+        </div> */}
         {/* <button id='left' className=' relative'>{`<`}</button> */}
       </Slider>
-      <div className="text-for-write w-full h-1/3 pt-5">
-        <div className="mt-4">
+      </div>
+      <div className="text-for-write flex justify-center items-center  h-1/3 pt-5">
+        <div className="mt-4 w-[95%] max-sm:w-full">
           {/* <h2>Products</h2> */}
           <ul className="grid grid-cols-1 max-sm:grid-cols-1 max-md:grid-cols-2 max-xl:grid-cols-3 lg:grid-cols-4 gap-4">
             {products.map((product) => {
@@ -167,6 +205,7 @@ function Home() {
         </div>
       </div>
       {/* <ProductDetail /> */}
+      <Testimonial/> 
     </div>
   );
 }
