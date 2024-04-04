@@ -1,4 +1,6 @@
 import img from "./../home/images/banner-1.jpg"
+import Qimg from "./../home/images/q.jpg"
+import testinomialPic from "./../home/images/about_img.png"
 function Testimonial() {
   return (
     <div className=" flex justify-center items-center ">
@@ -7,12 +9,12 @@ function Testimonial() {
         <div className=" grid lg:grid-cols-[300px,1fr] gap-4">
             <div className=" border border-gray-300 rounded-2xl grid place-items-center p-6 lg:p-0">
                 <div className=" text-center flex flex-col items-center p-5 max-sm:p-2">
-                    <img src={img} alt="profile" className=" rounded-full inline-block" width={80} height={80} />
+                    <img src={testinomialPic} alt="profile" className=" rounded-full inline-block" width={80} height={80} />
                     <h1 className=" text-2xl font-bold text-gray-500 dark:text-white">Aman Roy</h1>
                     <p className=" font-semibold">CEO & Founder of SwiftBuy</p>
                     {/* quote img  */}
-                    <img src="" alt="quotes" width={30} height={30} />
-                    <p className=" text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit earum ab, autem cupiditate vitae molestias!</p>
+                    <img src={Qimg} alt="quotes" width={30} height={30} className=" bg-blend-darken" />
+                    <p className=" text-sm">Hello! I'm Aman a CEO & founder of SwiftBuy.Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit earum ab </p>
                 </div>
             </div>
             <div className={` bg-cover h-[500px] rounded-2xl grid place-items-center`} style={{backgroundImage:`url(${img})`}}>

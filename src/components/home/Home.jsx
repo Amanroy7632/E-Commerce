@@ -10,13 +10,14 @@ import Testimonial from "../testimonial/Testimonial";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slide from "./slide/Slide";
-import  { CartState } from "../../context/Context";
+// import  { CartState } from "../../context/Context";
 // import useCart, { cartContextProvider } from '../../context/cartContext'
 import SingleProduct from "../product/SingleProduct";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 // import { getData  } from "../../products/productDataSet";
 // import getProduct from "../../products/productDataSet";
-import { useLoaderData } from "react-router-dom";
+import SearchBox from "../search/SearchBox";
+
 // import ProductDetail from "../productdetail/ProductDetail";
 async function getProduct(){
   await fetch('https://dumyjson.com/products').then(
@@ -31,14 +32,9 @@ async function getProduct(){
   console.log("Hello Aman");
 }
 function Home() {
-  //  const res=useLoaderData();
-  //  console.log(res);
-  // const data=getProduct();
+  
   const items=useSelector(state=>state.cartItem);
-  const dispatch=useDispatch()
-  // console.log(items.products);
   const products=items.products;
-  const { state } = CartState();
   // const products = [
   //   {
   //     pname: "Redmi Note 13 Pro 5G (8GB RAM, 128GB, Coral Purple)",
@@ -77,8 +73,28 @@ function Home() {
   //       "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSqBaDz9BuI-TPR-Pq2T7j2oXoa1y0LHthEARYKHEWaFsxxL50F5oG0uaEifQRKBhTO7JYjVaMRtRvOq8xu3WDrhg1GxDLaimLntub8i_MJ1wRglIBNHadPcg",
   //   },
   // ];
-  const [product, setProduct] = useState([]);
-  const [addProduct, setAddProduct] = useState({});
+  const [search,setSearch] = useState("");
+  const [product, setProduct] = useState(products);
+  // const itemName=product.filter()
+  const [filteredItemName,setFilteredItemName] = useState([]);
+  useEffect(()=>{
+    const filterData=(name)=>{
+    }
+    const filteredData=products.filter((item)=>(item.title.toLowerCase().includes(search.toLowerCase())))
+    let data=[]
+    setProduct(filteredData)
+    filteredData.forEach((item)=>{
+      if(item.title){
+        data.push(item.title)
+      }
+      // console.log(item.title.toLowerCase())
+    })
+    setFilteredItemName(data)
+    // console.log(product);
+    // console.log(filteredItemName);
+  },[search])
+  
+  // const [addProduct, setAddProduct] = useState({});
   // const {products} = useCart();
   let setting = {
     
@@ -90,51 +106,25 @@ function Home() {
     initialSlide: 0,
     slidesToScroll: 1,
     // dots: true,
-    // responsive: [
-    //   {
-    //     breakpoint: 1024,
-    //     settings: {
-    //       slidesToShow: 3,
-    //       slidesToScroll: 3,
-    //       infinite: true,
-    //       dots: true,
-    //     },
-    //   },
-    //   {
-    //     breakpoint: 600,
-    //     settings: {
-    //       slidesToShow: 2,
-    //       slidesToScroll: 2,
-    //       initialSlide: 2,
-    //     },
-    //   },
-    //   {
-    //     breakpoint: 480,
-    //     settings: {
-    //       slidesToShow: 1,
-    //       slidesToScroll: 1,
-    //     },
-    //   },
-    // ],
   };
-  const addToCart = (product) => {
-    setProduct((prevProduct) => {
-      return [{ id: Date.now(), ...product }, ...prevProduct];
-    });
-  };
+  // const addToCart = (product) => {
+  //   setProduct((prevProduct) => {
+  //     return [{ id: Date.now(), ...product }, ...prevProduct];
+  //   });
+  // };
 
-  const removeToCart = (id) => {
-    setProduct((prev) => prev.filter((prevProduct) => prevProduct.id !== id));
-  };
-  const addItem = (e) => {
-    e.preventDefault();
-    if (!addProduct) {
-      console.log("Empty item");
-      return;
-    }
-    addToCart(product);
-    console.log(product);
-  };
+  // const removeToCart = (id) => {
+  //   setProduct((prev) => prev.filter((prevProduct) => prevProduct.id !== id));
+  // };
+  // const addItem = (e) => {
+  //   e.preventDefault();
+  //   if (!addProduct) {
+  //     console.log("Empty item");
+  //     return;
+  //   }
+  //   addToCart(product);
+  //   console.log(product);
+  // };
   const slideData=[
     {
       id:1,
@@ -144,25 +134,27 @@ function Home() {
     },
     {
       id:2,
-      title:"",
+      title:"Treanding Outfits for women's",
       price:789,
       imgSrc:Himage5
     },
     {
       id:3,
-      title:"",
+      title:"New Sale is Live Now",
       price:199,
       imgSrc:Himage3
     },
     {
       id:4,
-      title:"",
+      title:"Men's latest fashion sale",
       price:139,
       imgSrc:Himage4
     }
   ]
   return (
     <div className="p-items w-full  overflow-y-auto overflow-x-hidden dark:bg-black dark:text-white">
+      <SearchBox search={search} setSearch={setSearch} filteredItemName={filteredItemName}/>
+    
       <div className=" lg:w-[95%] m-auto md:w-full">
       <Slider {...setting}>
         {
@@ -170,27 +162,6 @@ function Home() {
             <Slide key={data.id} data={data}/>
           ))
         }
-        {/* <div className="">
-          <img src={Himage2} className=" " alt="Pic" />
-        </div>
-        <div className="">
-          {" "}
-          <img src={Himage1} className=" " alt="" />
-        </div>
-        <div className="">
-          {" "}
-          <img src={Himage3} className=" " alt="" />
-        </div>
-        <div className="">
-          <img src={Himage4} className=" " alt="" />
-        </div>
-        <div className="">
-          {" "}
-          <img
-            src="https://img1.junaroad.com//assets/images/mobileNotif/img-1692595725646.jpg?crsl_pos=5"
-            alt=""
-          />
-        </div> */}
         {/* <button id='left' className=' relative'>{`<`}</button> */}
       </Slider>
       </div>
@@ -198,7 +169,7 @@ function Home() {
         <div className="mt-4 w-[95%] max-sm:w-full">
           {/* <h2>Products</h2> */}
           <ul className="grid grid-cols-1 max-sm:grid-cols-1 max-md:grid-cols-2 max-xl:grid-cols-3 lg:grid-cols-4 gap-4">
-            {products.map((product) => {
+            {product.map((product) => {
               return <SingleProduct key={product.id} product={product} />;
             })}
           </ul>

@@ -8,15 +8,17 @@ import Login from "../login/Login";
 import { useSelector } from "react-redux";
 import ThemeButton from "../theme/ThemeButton";
 import "./header.css";
-import { BiHome } from "react-icons/bi";
 import { BiUser } from "react-icons/bi";
 import { BiSolidContact } from "react-icons/bi";
 import { FaGithub } from "react-icons/fa";
 import { BiSearch } from "react-icons/bi";
-import { BiLogoProductHunt } from "react-icons/bi";
+
 import {AiOutlineHome,AiOutlineAppstore} from "react-icons/ai"
+import { useParams } from "react-router-dom";
 function Header() {
   // const { state } = CartState();
+  const {}=useParams()
+
   const [visible, setVisible] = useState(false);
   const [active, setActive] = useState(false);
   const turnOnlogin = () => {
@@ -174,33 +176,12 @@ function Header() {
         </nav>
       </header>:""
       }
-      <input type="text" name="" id="" placeholder="Q Search for Products,Brands and more" className=" px-4 py-4 dark:bg-black dark:text-white text-xl hidden max-md:flex justify-center items-center sticky top-0 z-50  bg-slate-200" />
-      {/* <div className=" hidden h-[5rem] max-md:flex justify-center items-center sticky top-0 z-50  bg-gray-300">
-        <input type="text" className=" w-[90%]" />
-        <button className=" w-1/4"><BiSearch className=" text-3xl" /></button>
-        <div className=" absolute right-0  top-0 p-1.5 backdrop-blur-xl">
-          <BiSearch className=" text-3xl" />
-        </div>
-      </div> */}
+      {/* <input type="text" name="" id="" placeholder="Q Search for Products,Brands and more" className=" px-4 py-4 dark:bg-black dark:text-white text-xl hidden max-md:flex justify-center items-center sticky top-0 z-50  bg-slate-200" /> */}
+      
       {
         <div className=" hidden  bg-white dark:bg-black dark:text-white max-md:flex  w-full h-[3rem] justify-center fixed bottom-0 z-20 backdrop-blur-lg font-bold">
-          <ul className=" flex justify-center items-center ">
-            <li id="navlinks" onClick={hideNavigationHandler}>
-              {" "}
-              <NavLink
-                to="/"
-                className={({ isActive }) =>
-                  `block  duration-200 w-full ${
-                    isActive
-                      ? "text-orange-700 "
-                      : "text-gray-700 dark:text-white "
-                  } hover:text-orange-700 lg:p-0 `
-                }
-              >
-                {/* Home */}
-                <AiOutlineHome className=" w-[2rem] h-[2rem]"/>
-              </NavLink>
-            </li>
+          <ul className=" flex justify-evenly items-center w-full  ">
+            
             <li id="navlinks" onClick={hideNavigationHandler}>
               {" "}
               <NavLink
@@ -217,7 +198,7 @@ function Header() {
                 <AiOutlineAppstore  className=" w-[2rem] h-[2rem]"/>
               </NavLink>
             </li>
-            <li id="navlinks" onClick={hideNavigationHandler}>
+            {/* <li id="navlinks" onClick={hideNavigationHandler}>
               <NavLink
                 to="/about"
                 className={({ isActive }) =>
@@ -228,10 +209,10 @@ function Header() {
                   }   hover:text-orange-700 lg:p-0 `
                 }
               >
-                {/* About */}
                 <BiUser className=" w-[2rem] h-[2rem]" />
               </NavLink>
-            </li>
+            </li> */}
+            
             <li id="navlinks" onClick={hideNavigationHandler}>
               <NavLink
                 to="/contact"
@@ -245,6 +226,22 @@ function Header() {
               >
                 {/* Contact */}
                 <BiSolidContact className=" w-[2rem] h-[2rem]" />
+              </NavLink>
+            </li>
+            <li id="navlinks" onClick={hideNavigationHandler}>
+              {" "}
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  `block  duration-200 w-full ${
+                    isActive
+                      ? "text-orange-700 "
+                      : "text-gray-700 dark:text-white "
+                  } hover:text-orange-700 lg:p-0 `
+                }
+              >
+                {/* Home */}
+                <AiOutlineHome className=" w-[2rem] h-[2rem]"/>
               </NavLink>
             </li>
             <li id="navlinks" onClick={hideNavigationHandler}>

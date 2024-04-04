@@ -123,7 +123,7 @@ function Contact() {
   
     
     <div className=" dark:bg-black dark:text-white">
-      <div className="flex justify-center max-md:h-[25vh] max-sm:h-[20vh] dark:bg-black text-white w-full bg-opacity-60" style={{backgroundImage:`url(https://media.istockphoto.com/id/1213738982/photo/male-college-professor-gestures-during-lecture.jpg?s=612x612&w=0&k=20&c=vPvCqzyq3VUzjCaU-PoMaxC1ncK386Q78Cdp7bUj2Mw=)`,backgroundSize:"cover",backgroundPosition:"center",backgroundClip:"content-box",backgroundRepeat:"no-repeat" }}>
+      <div className="flex justify-center max-md:h-[25vh] max-sm:h-[17vh] dark:bg-black text-white w-full bg-opacity-60" style={{backgroundImage:`url(https://media.istockphoto.com/id/1213738982/photo/male-college-professor-gestures-during-lecture.jpg?s=612x612&w=0&k=20&c=vPvCqzyq3VUzjCaU-PoMaxC1ncK386Q78Cdp7bUj2Mw=)`,backgroundSize:"cover",backgroundPosition:"center",backgroundClip:"content-box",backgroundRepeat:"no-repeat" }}>
         <div className=" flex w-4/5 items-center h-[50vh] max-md:h-full max-md:w-full  dark:text-white">
           <h1 className=" text-5xl px-10 " style={{fontWeight:"bolder"}} >Get In Touch</h1>
           <p></p>
@@ -131,12 +131,12 @@ function Contact() {
       </div>
       <div className="form lg:w-4/5 lg:h-[75vh] max-sm:w-full flex m-auto md:w-full dark:bg-black dark:text-white">
         <div className="form lg:w-[60%] max-md:w-full  h-full bg-slate-300">
-          <div className="form-values px-10 py-12 dark:bg-[#181a1b] dark:text-white">
+          <div className="form-values px-10 py-12 max-sm:py-6 dark:bg-[#181a1b] dark:text-white">
             <div className="flex justify-center items-center">
-              <h1 className=" py-5 text-4xl">Send us a Message</h1>
+              <h1 className=" py-5 max-sm:py-2 text-4xl">Send us a Message</h1>
             </div>
             <form  onSubmit={handleSubmit} ref={form} >
-              <div className="grid gap-8 md:grid-cols-2 grid-cols-1 mb-8 max-sm:mb-4 max-sm:gap-2">
+              <div className="grid gap-8 md:grid-cols-2 grid-cols-1 mb-8 max-sm:mb-0 max-sm:gap-0">
                 {inputFields.map((field) => {
                   return (
                     <div key={field.id} className="flex flex-col gap-2">

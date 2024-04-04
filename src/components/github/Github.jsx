@@ -28,7 +28,7 @@ function Github() {
     //     {data.avtar_url} */}
       
     // </div>
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center dark:bg-black dark:border-gray-700 ">
+    <div className="min-h-screen bg-gray-100 flex lg:items-center justify-center dark:bg-black dark:border-gray-700 ">
     <div className="max-w-md w-full bg-white p-8 shadow-md rounded-md dark:bg-gray-800 dark:border-gray-700 ">
       <Link to="https://portfolio-eight-rose-19.vercel.app/" target='_blanck' className='dark:text-white'> 
         
