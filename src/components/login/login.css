@@ -1,13 +1,12 @@
-.form-box{
+/* .form-box{
     position: relative;
     width: 600px;
     height: 450px;
-    /* background:transparent; */
+   
     display: flex;
     justify-content: center;
     align-items: top;
-    /* backdrop-filter: blur(12px); */
-    /* color: black; */
+   
     background-color: #6E2C00 ;
 }
 .form-box.hide{
@@ -110,4 +109,4 @@ button:hover{
 .register p a:hover{
     text-decoration: underline;
     color: blue;
-}
+} */

@@ -41,6 +41,7 @@ import ShoppingCart from "./components/cart/ShoppingCart";
 import ItemData from "./components/cart/ItemData";
 import Products from "./components/category/Products";
 import NewCart from "./components/cart/NewCart";
+import Login from "./components/login/Login";
 
 const data={
   products:[1,2,3,4,4]
@@ -67,6 +68,7 @@ const router = createBrowserRouter(
       <Route path="user/:userId" element={<User />} />
       <Route path="github" element={<Github />} loader={fetchGithubData} />
       <Route path="cart" element={<NewCart />} />
+      <Route path="login" element={<Login />} />
       {/* <Route path="cart" element={<NewCart/>} /> */}
     </Route>
   )
