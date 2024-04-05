@@ -8,6 +8,7 @@ import { store } from './app/store'
 import { ThemeContextProvider } from './context/theme'
 import {ToastContainer} from 'react-toastify'
 import { Toaster } from 'react-hot-toast'
+import authStore from './features/authStore'
 function Layout() {
   const [themeMode,setThemeMode]=useState("light")
   const lightTheme=()=>{
@@ -25,7 +26,8 @@ function Layout() {
   return (
     <ThemeContextProvider value={{themeMode,darkTheme,lightTheme}}>
     <Context>
-      <Provider store={store}>
+      <Provider store={store}  >
+        
     <Header/>
     <Toaster/>
      

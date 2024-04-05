@@ -42,6 +42,7 @@ import ItemData from "./components/cart/ItemData";
 import Products from "./components/category/Products";
 import NewCart from "./components/cart/NewCart";
 import Login from "./components/login/Login";
+import Signup from "./components/login/Signup";
 
 const data={
   products:[1,2,3,4,4]
@@ -69,6 +70,8 @@ const router = createBrowserRouter(
       <Route path="github" element={<Github />} loader={fetchGithubData} />
       <Route path="cart" element={<NewCart />} />
       <Route path="login" element={<Login />} />
+      <Route path="signup" element={<Signup/>} />
+      <Route path="*" element={<div>Page not found</div>} />
       {/* <Route path="cart" element={<NewCart/>} /> */}
     </Route>
   )

@@ -1,94 +1,93 @@
-// import React, { useState } from "react";
-// import "./login.css";
-// // import { closeLogin } from "../header/Header";
-// function Login({visible}) {
-//     // const[isvisible,setVisible]=useState(visible)
-//     function setLoginFalse(){
-//         document.querySelector(".form-box").classList.toggle("hide");
-//         visible=false;
-//         console.log("Check is Login Active",visible);
-//     }
-    
-//   return (
-//     <div className="form-box">
-//         <div className="close absolute top-1 right-1">
-//             {/* <h1 className=" text-3xl p-2 cursor-pointer" onClick={setLoginFalse}>❌</h1> */}
-//             </div>
-//       <div className="form-value">
-//         <form action="login.php" method="post">
-//           <h2>Login </h2>
-//           {/* <p>Login</p> */}
-//           {/* <span>Login</span> */}
-//           {/* <span className=" mt-8">X</span> */}
-          
-//           <div className="inputbox">
-//             <ion-icon name="mail-outline"></ion-icon>
-//             <input type="email" name="username" required />
-//             <label for="email">Email</label>
-//           </div>
-//           <div className="inputbox">
-//             <ion-icon name="lock-closed-outline"></ion-icon>
-//             <input type="password" name="pass" required />
-//             <label for="password">Password</label>
-//           </div>
-//           <div className="forget">
-//             <label for="">
-//               <input type="checkbox" />
-//               Remember Me <a href="">Forget Password</a>
-//             </label>
-//           </div>
-//           <button name="login">Log in</button>
-//           <div className="register">
-//             <p>
-//               Don't have an account ?<a href="signup.html">register</a>
-//             </p>
-//           </div>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Login;
-
-import React, { useState } from 'react';
-// import './App.css';
-
+import { login as authLogin } from "../../features/authSlice";
+import { Link , useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {useForm} from "react-hook-form"
+import React, { useState } from "react";
+import Input from "../commonUI/Input";
+import Button from "../commonUI/Button";
+import authService from "../../appwrite/auth/auth";
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [isresponse, setResponse] = useState({});
-  const handleLogin = async(e) => {
-    e.preventDefault();
-    const user={
-      password:password,
-      username:username
+  const navigate=useNavigate();
+  const dispatch=useDispatch();
+  const {register,handleSubmit} =useForm()
+  const [errorMessage, setErrorMessage] = useState("");
+  if (errorMessage) {
+    setTimeout(() => {
+      setErrorMessage("")
+    }, 2500);
+  }
+  const login = async (data)=>{
+    
+      setErrorMessage("");
+      try {
+        const session =await authService.login(data)
+        if (session) {
+          const userData=await authService.getCurrentUser()
+          if(userData){
+            console.log(userData);
+            dispatch(authLogin(userData));
+            navigate("/")
+          }
         }
-        console.log(user);
-    const url="http://localhost:8000/api/v1/users/login";
-   try {
-    const response= await fetch(url,{
-      method:"POST",
-      headers:{
-        "Content-Type": "application/json"
-      },
-      body:JSON.stringify(user)
-    })
-    const data = await response.json()
-    console.log(data);
-    setResponse(data)
-   } catch (error) {
-     console.log(`Error fetching ${url}`);
-   }
+      } catch (error) {
+        setErrorMessage(error.message)
+      }
+       //    for backend in moongoose
+      // const url = "http://localhost:8000/api/v1/users/login";
+      // try {
+      //   const response= await fetch(url, {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(user),
+      //   });
+      //   if (response) {
+      //      const userData=await response.json();
+      //      if (userData) {
+      //        dispatch(authLogin(userData));
+      //        navigate("/")
+      //      }
+      //   }
+      // } catch (error) {
+      //    setErrorMessage(error.message);
+      // }
+  }
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [isresponse, setResponse] = useState({});
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const user = {
+      password: password,
+      username: username,
+    };
+    console.log(user);
+    const url = "http://localhost:8000/api/v1/users/login";
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+      const data = await response.json();
+      console.log(data);
+      setResponse(data);
+      if (isresponse) {
+        alert("Login successful..");
+        console.log(isresponse);
+        const userName = isresponse.data?.user.fullname.split(" ");
+        console.log(userName);
+        document.getElementById("login").innerHTML = userName[0];
+      }
+    } catch (error) {
+      console.log(`Error fetching ${url}`);
+      setErrorMessage(error.message)
+    }
 
-   if (isresponse) {
-      alert("Login successful..")
-      console.log(isresponse.data?.user.fullname);
-      const userName=isresponse.data?.user.fullname.split(" ");
-      console.log(userName);
-      document.getElementById("login").innerHTML =userName[0];
-   }
+    
     // Add your login logic here
     // if (username === 'admin' && password === 'password') {
     //   alert('Login successful!');
@@ -98,37 +97,92 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-200 dark:bg-black dark:text-white">
-      <div className="bg-white p-8 rounded shadow-lg w-96 dark:bg-gray-800">
-        <h1 className="text-2xl font-bold mb-4">Login</h1>
-        {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
-        <form onSubmit={handleLogin} >
-          <div className="mb-4">
-            <label htmlFor="username" className="block text-sm font-medium">Username</label>
-            <input
-              type="text"
-              id="username"
-              name='username'
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="border dark:bg-gray-800 dark:text-white border-gray-300 rounded-md px-3 py-2 w-full"
+    <div className=" flex items-center justify-center w-full dark:bg-black">
+      <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10 dark:bg-gray-900 dark:text-white`}>
+        <div className=" mb-2 flex justify-center">
+          <span className=" inline-block w-full max-w-[100px]">
+            Logo
+          </span>
+        </div>
+        <h2 className=" text-center text-2xl font-bold leading-tight">
+          Sign in to your account
+        </h2>
+        <p className=" mt-2 text-center text-base text-black/60">
+          Don&apos;t have any account?&nbsp;
+          <Link to={"/signup"} className=" font-medium text-pretty transition-all duration-200 hover:underline">
+          Sign Up
+          </Link>
+        </p>
+        {errorMessage && <p className=" text-red-600 mt-8 text-center" >{errorMessage}</p>}
+        <form onSubmit={handleSubmit(login)} className=" mt-8 ">
+           <div className=" space-y-5">
+            <Input
+            label="Email"
+            placeholder="Enter your email"
+            type="email"
+            {...register("email",
+            {
+              required:true,
+              // validate:{
+              //   matchPatern:(value)=>/^/.test(value) || "Email address must be a valid address"
+              // }
+            })}
             />
-          </div>
-          <div className="mb-6">
-            <label htmlFor="password" className="block text-sm font-medium">Password</label>
-            <input
-              type="password"
-              id="password"
-              name='password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="border dark:bg-gray-800 dark:text-white border-gray-300 rounded-md px-3 py-2 w-full"
-            />
-          </div>
-          <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md w-full">Login</button>
+            <Input
+            label="Password"
+            type="password"
+            placeholder="Enter your password"
+            {...register("password",{
+              required:true,
+            })} />
+            <Button
+             type="submit" 
+            className=" w-full" >Sign in</Button>
+           </div>
         </form>
+
       </div>
     </div>
+    // <div className="flex justify-center items-center min-h-screen bg-gray-200 dark:bg-black dark:text-white">
+    //   <div className="bg-white p-8 rounded shadow-lg w-96 dark:bg-gray-800">
+    //     <h1 className="text-2xl font-bold mb-4">Login</h1>
+    //     {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
+    //     <form onSubmit={handleLogin}>
+    //       <div className="mb-4">
+    //         <label htmlFor="username" className="block text-sm font-medium">
+    //           Username
+    //         </label>
+    //         <input
+    //           type="text"
+    //           id="username"
+    //           name="username"
+    //           value={username}
+    //           onChange={(e) => setUsername(e.target.value)}
+    //           className="border dark:bg-gray-800 dark:text-white border-gray-300 rounded-md px-3 py-2 w-full"
+    //         />
+    //       </div>
+    //       <div className="mb-6">
+    //         <label htmlFor="password" className="block text-sm font-medium">
+    //           Password
+    //         </label>
+    //         <input
+    //           type="password"
+    //           id="password"
+    //           name="password"
+    //           value={password}
+    //           onChange={(e) => setPassword(e.target.value)}
+    //           className="border dark:bg-gray-800 dark:text-white border-gray-300 rounded-md px-3 py-2 w-full"
+    //         />
+    //       </div>
+    //       <button
+    //         type="submit"
+    //         className="bg-blue-500 text-white px-4 py-2 rounded-md w-full"
+    //       >
+    //         Login
+    //       </button>
+    //     </form>
+    //   </div>
+    // </div>
   );
 };
-export default Login
+export default Login;

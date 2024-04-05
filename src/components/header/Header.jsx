@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserTie, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import Login from "../login/Login";
 // import { CartState } from "../../context/Context";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import ThemeButton from "../theme/ThemeButton";
 import "./header.css";
 import { BiUser } from "react-icons/bi";
@@ -15,8 +15,12 @@ import { BiSearch } from "react-icons/bi";
 
 import {AiOutlineHome,AiOutlineAppstore} from "react-icons/ai"
 import { useParams } from "react-router-dom";
+import LogoutBtn from "./LogoutBtn";
+import User from "../user/User";
 function Header() {
   // const { state } = CartState();
+  const authStatus =useSelector((state)=>state.auth?.status)
+  console.log(authStatus);
   const {}=useParams()
 
   const [visible, setVisible] = useState(false);
@@ -26,6 +30,7 @@ function Header() {
     setVisible(!visible);
   };
   const data = useSelector((state) => state.cartItem);
+  // console.log(data);
   const items = data.cart;
   let links;
   const menubarHandler = (e) => {
@@ -61,14 +66,18 @@ function Header() {
               />
             </Link>
             <div className="flex items-center lg:order-2 ">
-              <Link
-                id="login"
-                to={"/login"}
-                // onClick={turnOnlogin}
-                className=" text-gray-800 dark:hover:bg-black hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 max-sm:px-2 py-2 lg:py-2.5 mr-2 max-md:mr-0 focus:outline-none dark:text-white"
-              >
-                Log in
-              </Link>
+              {
+                authStatus ? <User/>:( <Link
+                  id="login"
+                  to={"/login"}
+                  // onClick={turnOnlogin}
+                  className=" text-gray-800 dark:hover:bg-black hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 max-sm:px-2 py-2 lg:py-2.5 mr-2 max-md:mr-0 focus:outline-none dark:text-white"
+                >
+                  Log in
+                </Link>)
+              }
+             
+              
               <Link
                 to="/cart"
                 className="font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 max-sm:px-1 ml-1 max-md:mr-0 focus:outline-none dark:text-white "
