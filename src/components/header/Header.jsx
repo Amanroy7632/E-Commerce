@@ -80,13 +80,14 @@ function Header() {
               
               <Link
                 to="/cart"
-                className="font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 max-sm:px-1 ml-1 max-md:mr-0 focus:outline-none dark:text-white "
+                className=" relative font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 max-sm:px-1 ml-1 max-md:mr-0 focus:outline-none dark:text-white "
               >
                 {/* Get started */}
                 <FontAwesomeIcon icon={faShoppingCart} />
-                <sup className=" text-lg p-1 overflow-hidden">
+                <span className=" absolute top-0 font-bold text-orange-400">{items.length}</span>
+                {/* <sup className=" text-lg p-1 overflow-hidden">
                   {items.length}
-                </sup>
+                </sup> */}
               </Link>
               {/* <div
                 className="menu-bar flex justify-between flex-col cursor-pointer mr-4 lg:hidden"
@@ -116,7 +117,7 @@ function Header() {
                     className={({ isActive }) =>
                       `block py-2 pr-4 pl-3 duration-200 ${
                         isActive
-                          ? "text-orange-700 "
+                          ? "text-orange-400 "
                           : "text-gray-700 dark:text-white "
                       } border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0 `
                     }
