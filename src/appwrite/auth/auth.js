@@ -13,6 +13,7 @@ export class AuthService{
             if (userAccount) 
             {
                 this.login({email,password});
+                return userAccount
             }else{
                 return userAccount;
             }

@@ -3,14 +3,16 @@ import { Link,useNavigate } from 'react-router-dom'
 import { login } from '../../features/authSlice'
 import { useDispatch } from 'react-redux'
 import {useForm} from "react-hook-form"
-import Input from '../commonUI/Input'
-import Button from '../commonUI/Button'
+import {Button,Input} from "../commonUI/index.js"
 import authService from '../../appwrite/auth/auth'
+import ProgressBar from '../loader/ProgressBar'
+import {toast} from "react-hot-toast"
 const Signup = () => {
     const navigate = useNavigate()
     const {register,handleSubmit}=useForm()
     const dispatch = useDispatch()
     const [err,setErr]=useState('')
+    const [isActiveProgress,setActiveProgress]=useState(false)
     // const getCurrentUser =async()=>{
     //     const url="http://localhost:8000/api/v1/users/current-user"
     //     try {
@@ -28,17 +30,25 @@ const Signup = () => {
     // }
     const createUser= async(data)=>{
        setErr("")
+       setActiveProgress(true)
        try {
          const userData =await authService.createAccount(data)
+        //  console.log(userData);
          if (userData) {
              const userData=await authService.getCurrentUser()
+            //  console.log(userData);
              if (userData) {
+                // console.log(userData);
+                toast.success(`Welcome ${userData?.name} to SwiftBuy 🙏🏾`)
                 dispatch(login(userData))
                 navigate("/")
              }
          }
        } catch (error) {
         setErr(error.message)
+       }
+       finally{
+        setActiveProgress(false)
        }
     //    for backend in moongoose
     //    const url="http://localhost:8000/api/v1/users/register"
@@ -58,17 +68,21 @@ const Signup = () => {
     //    }
     }
   return (
-    <div className=' flex justify-center items-center'>
-      <div className={` mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}>
+    <>
+    {
+        isActiveProgress?<ProgressBar/>:null
+    }
+    <div className=' flex justify-center items-center dark:bg-black'>
+      <div className={` mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10 dark:bg-gray-900 dark:text-white`}>
         <div className=' mb-2 flex justify-center'>
             <span className=' inline-block w-full max-w-[100px]'>
                 logo 
             </span>
         </div>
         <h2 className=' text-center text-2xl font-bold leading-tight'>Sign up to create account</h2>
-        <p className=' mt-2 text-center text-base text-black/10'>
+        <p className=' mt-2 text-center text-base text-gray-500 dark:text-white'>
             Already hav an account?&nbsp;
-            <Link to={"/login"} className=' font-medium text-pretty transition-all duration-200 hover:underline'>
+            <Link to={"/login"} className=' font-medium text-pretty transition-all duration-200 hover:underline dark:text-white'>
             Sign in</Link>
         </p>
         {err && <p className=' text-red-600 mt-8 text-center'>{err}</p>}
@@ -119,7 +133,12 @@ const Signup = () => {
          </form>
       </div>
     </div>
+    </>
   )
 }
 
 export default Signup
+
+
+
+/* HTML: <div class="loader"></div> */

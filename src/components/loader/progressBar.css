@@ -1,0 +1,9 @@
+.progress {
+    background:
+     linear-gradient(orange 0 0) 0/0% no-repeat
+     lightblue;
+    animation: l2 2s infinite steps(20);
+  }
+  @keyframes l2 {
+      100% {background-size:110%}
+  }

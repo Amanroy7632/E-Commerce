@@ -12,7 +12,7 @@ import { BiUser } from "react-icons/bi";
 import { BiSolidContact } from "react-icons/bi";
 import { FaGithub } from "react-icons/fa";
 import { BiSearch } from "react-icons/bi";
-
+import { login } from "../../features/authSlice";
 import {AiOutlineHome,AiOutlineAppstore} from "react-icons/ai"
 import { useParams } from "react-router-dom";
 import LogoutBtn from "./LogoutBtn";
@@ -20,7 +20,7 @@ import User from "../user/User";
 function Header() {
   // const { state } = CartState();
   const authStatus =useSelector((state)=>state.auth?.status)
-  console.log(authStatus);
+  // console.log(authStatus);
   const {}=useParams()
 
   const [visible, setVisible] = useState(false);

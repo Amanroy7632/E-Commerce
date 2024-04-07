@@ -1,36 +1,41 @@
 import { login as authLogin } from "../../features/authSlice";
 import { Link , useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import {useForm} from "react-hook-form"
 import React, { useState } from "react";
 import Input from "../commonUI/Input";
 import Button from "../commonUI/Button";
 import authService from "../../appwrite/auth/auth";
+import ProgressBar from "../loader/ProgressBar";
 const Login = () => {
   const navigate=useNavigate();
   const dispatch=useDispatch();
   const {register,handleSubmit} =useForm()
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoaderActive,setLoaderActive]=useState(false)
   if (errorMessage) {
     setTimeout(() => {
       setErrorMessage("")
     }, 2500);
   }
   const login = async (data)=>{
-    
+    setLoaderActive(true)
       setErrorMessage("");
       try {
         const session =await authService.login(data)
         if (session) {
           const userData=await authService.getCurrentUser()
           if(userData){
-            console.log(userData);
-            dispatch(authLogin(userData));
+            // console.log(userData);
+            dispatch(authLogin(userData)); 
             navigate("/")
           }
         }
       } catch (error) {
         setErrorMessage(error.message)
+      }
+      finally{
+        setLoaderActive(false)
       }
        //    for backend in moongoose
       // const url = "http://localhost:8000/api/v1/users/login";
@@ -53,8 +58,7 @@ const Login = () => {
       //    setErrorMessage(error.message);
       // }
   }
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+
   const [isresponse, setResponse] = useState({});
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -95,9 +99,21 @@ const Login = () => {
     //   setErrorMessage('Invalid username or password');
     // }
   };
-
+  // let progress=70;
+  // // const [progress,setProgress]=useState(0)
+  // while (isLoaderActive && progress<100) {
+  //   if (progress>=100) {
+  //     progress=0
+  //   }
+  //    progress=(progress+Math.floor(Math.random()*12))
+  //   // return <Loader/>
+  // }
   return (
-    <div className=" flex items-center justify-center w-full dark:bg-black">
+    <>
+    {
+      isLoaderActive?<ProgressBar/>:""
+    }
+    <div className=" flex items-center justify-center w-full dark:bg-black pt-3">
       <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10 dark:bg-gray-900 dark:text-white`}>
         <div className=" mb-2 flex justify-center">
           <span className=" inline-block w-full max-w-[100px]">
@@ -107,9 +123,9 @@ const Login = () => {
         <h2 className=" text-center text-2xl font-bold leading-tight">
           Sign in to your account
         </h2>
-        <p className=" mt-2 text-center text-base text-black/60">
+        <p className=" mt-2 text-center text-base text-black/60 dark:text-white">
           Don&apos;t have any account?&nbsp;
-          <Link to={"/signup"} className=" font-medium text-pretty transition-all duration-200 hover:underline">
+          <Link to={"/signup"} className=" font-medium text-pretty transition-all duration-200 hover:underline dark:text-white">
           Sign Up
           </Link>
         </p>
@@ -143,6 +159,7 @@ const Login = () => {
 
       </div>
     </div>
+    </>
     // <div className="flex justify-center items-center min-h-screen bg-gray-200 dark:bg-black dark:text-white">
     //   <div className="bg-white p-8 rounded shadow-lg w-96 dark:bg-gray-800">
     //     <h1 className="text-2xl font-bold mb-4">Login</h1>

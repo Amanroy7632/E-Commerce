@@ -31,9 +31,9 @@ const SearchBox = ({search,setSearch,filteredItemName}) => {
       </div>
       {visible?<div className=" px-5 h-[10rem] overflow-scroll">
         <ul className=" flex flex-col gap-1">
-      {filteredItemName.map((country, index) => (
+      {filteredItemName.map((itemName, index) => (
         <li className=" hover:bg-blue-300 dark:text-gray-200 " onClick={(e)=>{handleItemSelect(index)
-        }} key={index}>{country}</li>
+        }} key={index}>{itemName}</li>
       ))}
     </ul>
       </div>:""}

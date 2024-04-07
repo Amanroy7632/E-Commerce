@@ -22,6 +22,9 @@ export const cartSlice = createSlice({
             // console.log("Am Working");
            state.cart= state.cart.filter(item=>item.id !== action.payload)
         },
+        removeAllToCart:(state)=>{
+            state.cart=[]
+        },
         increaseQty:(state,action)=>{
             let getIndex=state.cart.findIndex((item)=>(item.id === action.payload.id))
             getIndex>=0?state.cart[getIndex].qty+=1:state.cart[getIndex]
@@ -51,10 +54,17 @@ export const cartSlice = createSlice({
             // Implement sorting logic based on the specified field
             const sortedCart = [...state.cart].sort((a, b) => a[sortByField] - b[sortByField]);
             return { ...state, cart: sortedCart };
-        }
+        },
+        // login:(state,action)=>{
+        //     state.userState.status=true
+        //     state.userState.userData=action.payload;
+        // },
+        // logout:(state)=>{
+        //     state.userState.status=false;
+        // }
         
     }
 })
 // we need to export the functionality seprately 
-export const {addToCart,updateToCart,removeToCart,increaseQty,decreaseQty,checkPromoCode,sortBy} =cartSlice.actions
+export const {addToCart,updateToCart,removeToCart,removeAllToCart,increaseQty,decreaseQty,checkPromoCode,sortBy} =cartSlice.actions
 export default cartSlice.reducer

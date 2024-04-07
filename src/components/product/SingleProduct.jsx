@@ -6,9 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart ,removeToCart } from "../../features/cartSlice";
 import {AiFillStar,AiOutlineStar} from "react-icons/ai"
 import {toast} from 'react-hot-toast'
+import { login } from "../../features/authSlice";
 function SingleProduct({ product }) {
   const state=useSelector(state=>state.cartItem)
   const dispatch1 = useDispatch();
+  const authStatus=useSelector((state)=>state.auth?.status)
   const generateStar=(rating)=>{
     const floorRating=Math.floor(rating)
     // console.log(floorRating);
@@ -172,8 +174,11 @@ function SingleProduct({ product }) {
            
                <a
                onClick={() => {
-                 dispatch1(removeToCart(product.id));
-                 toast.error("Item removed successfully")
+                if(authStatus){
+
+                  dispatch1(removeToCart(product.id));
+                  toast.error("Item removed successfully")
+                }
                }}
                className="  text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-500 dark:hover:bg-red-700 dark:focus:ring-red-800 cursor-pointer"
              >
@@ -182,8 +187,13 @@ function SingleProduct({ product }) {
             ) : (
                 <a
                 onClick={() => {
-                  dispatch1(addToCart(product));
-                  toast.success ("Item added successfully")
+                  if (authStatus) {
+                    dispatch1(addToCart(product));
+                    toast.success ("Item added successfully")
+                  }else{
+                    toast.error ("Login First ")
+                  
+                  }
                 }}
                 className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 cursor-pointer"
               >

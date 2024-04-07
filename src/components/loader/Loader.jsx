@@ -5,6 +5,7 @@ function Loader() {
     <div className=' loader-container w-full  flex justify-center items-center py-60 dark:bg-black overflow-hidden'>
       <span class="loader dark:text-white"></span>
     </div>
+    // <div className="loader"></div>
   )
 }
 
