@@ -109,6 +109,7 @@ function Contact() {
     if(isValidInput(formData)){
        
       sendEmail();
+      document.querySelector(".feedback-form").reset()
     }else{
       toast.error("Invalid Information")
     }
@@ -119,9 +120,7 @@ function Contact() {
       message: '',
     })
   }
-  return (
-  
-    
+  return (  
     <div className=" dark:bg-black dark:text-white">
       <div className="flex justify-center max-md:h-[25vh] max-sm:h-[17vh] dark:bg-black text-white w-full bg-opacity-60" style={{backgroundImage:`url(https://media.istockphoto.com/id/1213738982/photo/male-college-professor-gestures-during-lecture.jpg?s=612x612&w=0&k=20&c=vPvCqzyq3VUzjCaU-PoMaxC1ncK386Q78Cdp7bUj2Mw=)`,backgroundSize:"cover",backgroundPosition:"center",backgroundClip:"content-box",backgroundRepeat:"no-repeat" }}>
         <div className=" flex w-4/5 items-center h-[50vh] max-md:h-full max-md:w-full  dark:text-white">
@@ -135,7 +134,7 @@ function Contact() {
             <div className="flex justify-center items-center">
               <h1 className=" py-5 max-sm:py-2 text-4xl">Send us a Message</h1>
             </div>
-            <form  onSubmit={handleSubmit} ref={form} >
+            <form  onSubmit={handleSubmit} ref={form} className='feedback-form' >
               <div className="grid gap-8 md:grid-cols-2 grid-cols-1 mb-8 max-sm:mb-0 max-sm:gap-0">
                 {inputFields.map((field) => {
                   return (
