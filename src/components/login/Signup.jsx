@@ -29,20 +29,21 @@ const Signup = () => {
     //     }
     // }
     const createUser= async(data)=>{
+        // console.log(data);
        setErr("")
        setActiveProgress(true)
        try {
          const userData =await authService.createAccount(data)
         //  console.log(userData);
          if (userData) {
-             const userData=await authService.getCurrentUser()
+            //  const userData=await authService.getCurrentUser()
             //  console.log(userData);
-             if (userData) {
-                // console.log(userData);
-                toast.success(`Welcome ${userData?.name} to SwiftBuy 🙏🏾`)
-                dispatch(login(userData))
-                navigate("/")
-             }
+            toast.success(`Welcome ${userData?.name} to SwiftBuy 🙏🏾`)
+            dispatch(login(userData))
+            navigate("/")
+            //  if (userData) {
+            //     // console.log(userData);
+            //  }
          }
        } catch (error) {
         setErr(error.message)

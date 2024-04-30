@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 function User() {
   const username =useSelector((state)=>state.auth?.userData?.name)
   const userFirstName=username.split(' ')
-  // console.log(userFirstName);
+  console.log(userFirstName);
   const [showComponent ,setShowComponent] =useState(false);
   // console.log(username);
     // const {userId}=useParams()
