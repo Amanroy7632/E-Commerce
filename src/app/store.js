@@ -10,7 +10,6 @@ export const store=configureStore({
     // reducer:{
     //     cartItem: cartSlice,
     //     auth:authSlice
-
     // }
     reducer:mainReducer
 })
